@@ -1,0 +1,7 @@
+import instance from "@/utils/Interceptor";
+const reviewService = {
+  postReview: (payload = {}) => {
+    return instance.get(`/reviews`, payload);
+  },
+};
+export default reviewService;

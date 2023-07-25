@@ -1,0 +1,19 @@
+a {
+    cursor: pointer;
+}
+
+a.active {
+    color: rgb(252, 185, 65) !important;
+}
+
+.modal-content {
+    z-index: 1000;
+}
+
+.modal-backdrop {
+    z-index: 1000;
+}
+
+.loading-skeleton {
+    height: 100%;
+}
