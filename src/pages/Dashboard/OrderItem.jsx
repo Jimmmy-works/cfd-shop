@@ -4,19 +4,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Modal, Rate } from "antd";
-import { ExclamationCircleFilled, InfoCircleOutlined } from "@ant-design/icons";
-// import { Input } from "antd";
+import { SwapRightOutlined } from "@ant-design/icons";
+import { Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import useDashboard from "./useDashboard";
 import { getOrder } from "@/store/reducer/orderReducer";
-import orderService from "@/service/orderService";
-import { useForm } from "react-hook-form";
-import { Input } from "@/components/Input";
-import { Rating } from "@mui/material";
-const TableBody = styled.tbody`
-  td {
-    border: 0;
-  }
-`;
+
 const Title = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,107 +29,40 @@ const OrderItem = ({
   product,
   quantity,
   isReview,
-  executeReview,
+
   id: idOrder,
-  dataReview,
-  onPostReview,
 }) => {
+  const { orderProps } = useDashboard();
+  const { executeReview } = orderProps || {};
   const dispatch = useDispatch();
   const { orderInfo } = useSelector((state) => state.order);
-  const { register, watch, getValues, setValue } = useForm();
   // Handle Error Image
   const [errorImage, setErrorImage] = useState(false);
   const imageError =
     "https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280";
   // Modal Antd
-  const { confirm } = Modal;
 
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
   const [rateValue, setRateValue] = useState();
   const [titleValue, setTitleValue] = useState("");
   const [desValue, setDesValue] = useState("");
-
-  const handleReview = (productId) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = async (productItem) => {
+    setIsModalOpen(false);
     const payload = {
       order: idOrder || "",
-      product: productId || "",
+      product: productItem?.id || "",
       title: titleValue,
       description: desValue,
       rate: rateValue,
     };
-    // const payload = {
-    //   order: idOrder || "",
-    //   product: productId || "",
-    //   title: getValues("title"),
-    //   description: getValues("description"),
-    //   rate: getValues("rate"),
-    //   // rate: rateValue,
-    // };
-    console.log("payload", payload);
-    // executeReview(payload);
+    executeReview(payload);
   };
-
-  const onPopup = (productId) => {
-    confirm({
-      title: `Đánh giá ${product?.name}?`,
-      icon: <ExclamationCircleFilled />,
-      content: (
-        <ContentModal>
-          <Rating
-            name="simple-controlled"
-            value={rateValue}
-            onChange={(event, newValue) => {
-              console.log("newValue", newValue);
-              console.log("event", event);
-              setRateValue(newValue);
-            }}
-          />
-          {/* <Rate allowHalf tooltips={desc} onChange={setRateValue} /> */}
-          {/* <Input
-              label="Title"
-              {...register("title", {
-                required: `Title is required `,
-              })}
-              // error={errors?.firstName?.message}
-              type="text"
-              required
-            />
-            <Input
-              label="Description"
-              required
-              {...register("description", {
-                required: `Description is required `,
-              })}
-              renderProps={(inputProps) => {
-                return (
-                  <textarea
-                    {...inputProps}
-                    className="form-control"
-                    cols={30}
-                    rows={4}
-                    placeholder="Enter somthing..."
-                  />
-                );
-              }}
-            /> */}
-          <Input
-            value={titleValue}
-            onChange={(e) => setTitleValue(e.target.value)}
-            placeholder="Title"
-          />
-          <Input.TextArea
-            value={desValue}
-            onChange={(e) => setDesValue(e.target.value)}
-            placeholder="Description"
-            rows={6}
-          />
-        </ContentModal>
-      ),
-      onOk() {
-        handleReview(productId);
-      },
-      onCancel() {},
-    });
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -145,9 +71,9 @@ const OrderItem = ({
         product?.map((productItem, index) => {
           const { name, price, images, slug } = productItem || {};
           return (
-            <TableBody>
+            <tbody>
               <tr>
-                <td x className="product-col">
+                <td className="product-col">
                   <div className="product">
                     <figure className="product-media">
                       <Link to={`${PATHS.PRODUCT.INDEX}/${slug}`} href="#">
@@ -164,14 +90,46 @@ const OrderItem = ({
                           {name}
                         </Link>
                       </h3>
-                      {!!!isReview[index] && (
-                        <a
-                          className="review"
-                          onClick={() => onPopup(productItem.id)}
-                        >
-                          Review Product
-                          <InfoCircleOutlined />
-                        </a>
+                      {!isReview[index] && (
+                        <div>
+                          <a
+                            style={{ border: 0 }}
+                            className="review"
+                            onClick={showModal}
+                          >
+                            <SwapRightOutlined />
+                            Review Product
+                          </a>
+                          <Modal
+                            maskStyle={{
+                              backgroundColor: " rgba(0, 0, 0, 0.1)",
+                            }}
+                            title={`Review ${name}`}
+                            open={isModalOpen}
+                            onOk={() => handleOk(productItem)}
+                            onCancel={handleCancel}
+                          >
+                            <ContentModal>
+                              <Rate
+                                allowHalf
+                                tooltips={desc}
+                                onChange={setRateValue}
+                              />
+
+                              <Input
+                                value={titleValue}
+                                onChange={(e) => setTitleValue(e.target.value)}
+                                placeholder="Title"
+                              />
+                              <Input.TextArea
+                                value={desValue}
+                                onChange={(e) => setDesValue(e.target.value)}
+                                placeholder="Description"
+                                rows={6}
+                              />
+                            </ContentModal>
+                          </Modal>
+                        </div>
                       )}
                     </Title>
                   </div>
@@ -185,7 +143,7 @@ const OrderItem = ({
                   ${fomatCurrency(price * quantity[index])}
                 </td>
               </tr>
-            </TableBody>
+            </tbody>
           );
         })}
     </>

@@ -90,7 +90,6 @@ const useHome = () => {
     error: errorDeal,
   } = useMutation(subscribeService.subscribeDeal, {
     onSuccess: (data) => {
-      console.log("data", data);
       message.success(`Coupon đã được gửi qua địa chỉ email bạn`);
     },
     onFail: () => {

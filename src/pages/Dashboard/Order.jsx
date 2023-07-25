@@ -3,11 +3,27 @@ import useDashboard from "./useDashboard";
 import OrderList from "./OrderList";
 import { Link } from "react-router-dom";
 import { PATHS } from "@/contants/paths";
+import { useDispatch, useSelector } from "react-redux";
+import orderService from "@/service/orderService";
+import { authActions } from "@/store/reducer/authReducer";
 const Order = () => {
-  const { orderProps } = useDashboard();
-  const { orderMeData, executeReview, dataReview } = orderProps || {};
-  const { orders } = orderMeData || [];
-
+  const dispatch = useDispatch();
+  const { listOrder } = useSelector((state) => state.auth);
+  const getOrders = async () => {
+    try {
+      const res = await orderService.getOrderMe();
+      console.log("res", res);
+      if (res?.data?.data) {
+        dispatch(authActions.setOrder(res.data.data));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  useEffect(() => {
+    getOrders();
+  }, []);
+  if (!listOrder) return null;
   return (
     <>
       <div
@@ -16,15 +32,9 @@ const Order = () => {
         role="tabpanel"
         aria-labelledby="tab-orders-link"
       >
-        {orders?.length ? (
-          orders?.map((orderList) => {
-            return (
-              <OrderList
-                dataReview={dataReview}
-                executeReview={executeReview}
-                orderList={orderList}
-              />
-            );
+        {listOrder?.orders?.length ? (
+          listOrder?.orders?.map((orderList) => {
+            return <OrderList orderList={orderList} />;
           })
         ) : (
           <>

@@ -25,7 +25,6 @@ const QuantityInputM = (
   ref
 ) => {
   const [renderValue, setRenderValue] = useState(value || 1);
-  console.log("renderValue", renderValue);
   // useEffect(() => {
   //   if (renderValue !== value) {
   //     onChange?.(renderValue);

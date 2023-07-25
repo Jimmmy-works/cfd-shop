@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 const useDashboard = () => {
-  const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.auth);
   //// Profile
   const [provinces, setProvinces] = useState([]);
@@ -131,18 +130,13 @@ const useDashboard = () => {
     loading: loadingMeData,
     error: errorMeData,
   } = useQuery(orderService.getOrderMe);
-  const onPostReview = (payload) => {
-    if (!payload) return;
-    executeReview(payload);
-    if (dataReview?.data) dispatch(getOrder());
-  };
+
   const orderProps = {
     orderMeData,
     loadingMeData,
     errorMeData,
     executeReview,
     dataReview,
-    onPostReview,
   };
 
   useEffect(() => {
