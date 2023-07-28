@@ -41,8 +41,6 @@ export const signin = createAsyncThunk(
       return resProfile?.data?.data;
     } catch (error) {
       console.log("error", error);
-      // localStorage.removeItem(LOCAL_STORAGE.token);
-      // localStorage.removeItem(LOCAL_STORAGE.refreshToken);
       throw error;
     }
   }

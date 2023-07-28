@@ -9,9 +9,13 @@ import { useMainContext } from "../MainContext";
 import { LOCAL_STORAGE } from "@/contants/localStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { THUNK_STATUS } from "@/contants/general";
-import { getCart, updateCart } from "@/store/reducer/cartReducer";
-import { useDebounce } from "@uidotdev/usehooks";
-import SkeletonLoading from "../SkeletonLoading";
+import { updateCart } from "@/store/reducer/cartReducer";
+import {
+  addWhiteList,
+  whiteListActions,
+} from "@/store/reducer/whiteListReducer";
+import { getProfile } from "@/store/reducer/authReducer";
+import { useEffect } from "react";
 const ImageWrapper = styled.div`
   .ant-image {
     display: block;
@@ -30,10 +34,16 @@ const ProductCard = ({ product, isProductLoading }) => {
       transition: { duration: 0.4 },
     },
   };
-  const { updateStatus } = useSelector((state) => state.cart);
-  const { cartInfo } = useSelector((state) => state.cart);
-  const { slug, title, id, images, rating } = product || {};
+  const { profile } = useSelector((state) => state.auth);
+  const { updateStatus, cartInfo } = useSelector((state) => state.cart);
+  const { whiteListInfo, addStatus, updateListInfo } = useSelector(
+    (state) => state.whitelist
+  );
+  const { slug, id, images, rating, name } = product || {};
+  // console.log("id", id);
+  // console.log("profile", profile);
   const dispatch = useDispatch();
+  console.log("whiteListInfo", whiteListInfo);
   const onAddToCart = async () => {
     const isLogin = localStorage.getItem(LOCAL_STORAGE.token);
     try {
@@ -83,6 +93,41 @@ const ProductCard = ({ product, isProductLoading }) => {
       console.log("error", error);
     }
   };
+  const onAddToWhiteList = async () => {
+    const isLogin = localStorage.getItem(LOCAL_STORAGE.token);
+    try {
+      if (isLogin) {
+        let newPayload = {};
+
+        const newProductPayload = profile?.whiteList?.map(
+          (product) => product?.id
+        );
+        if (id && addStatus !== THUNK_STATUS.pending) {
+          if (whiteListInfo?.id) {
+            newPayload = {
+              product: newProductPayload,
+            };
+          } else {
+            newPayload = {
+              product: id,
+            };
+          }
+          const res = await dispatch(addWhiteList(newPayload));
+          if (res?.payload?.data?.data?.id) {
+            await dispatch(getProfile());
+            await dispatch(whiteListActions.setWhiteList(res?.payload));
+            message.success(`Đã thêm sản phẩm ${name} vào whitelist`);
+          } else {
+            message.success(`Sản phẩm đã có trong whitelist`);
+          }
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+      message.error(`Đã xảy ra lỗi xin vui lòng thử lại`);
+    }
+  };
+  useEffect(() => {}, []);
 
   return (
     <motion.div
@@ -134,7 +179,10 @@ const ProductCard = ({ product, isProductLoading }) => {
           } */}
         </Link>
         <div className="product-action-vertical">
-          <a className="btn-product-icon btn-wishlist btn-expandable">
+          <a
+            onClick={onAddToWhiteList}
+            className="btn-product-icon btn-wishlist btn-expandable"
+          >
             <span>add to wishlist</span>
           </a>
         </div>

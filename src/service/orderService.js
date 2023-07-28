@@ -4,7 +4,7 @@ const orderService = {
     return instance.get(`/orders/me`);
   },
   getReviewById: (id = "") => {
-    return instance.post(`/reviews/product/${id}`, id);
+    return instance.get(`/reviews/product/${id}`);
   },
   postReview: (payload = {}) => {
     return instance.post(`/reviews`, payload);

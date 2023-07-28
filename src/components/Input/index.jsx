@@ -25,6 +25,7 @@ const InputM = (
         <input
           placeholder={placeholder}
           disabled={disabled}
+          style={{ cursor: disabled ? "not-allowed" : "" }}
           ref={ref}
           type={type}
           className={`form-control ${

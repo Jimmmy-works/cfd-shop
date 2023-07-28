@@ -1,19 +1,15 @@
-import { LOCAL_STORAGE } from "@/contants/localStorage";
 import useMutation from "@/hooks/useMutation";
 import useQuery from "@/hooks/useQuery";
 import { authenService } from "@/service/authenService";
 import { countryService } from "@/service/countryService";
 import orderService from "@/service/orderService";
 import { authActions, getProfile } from "@/store/reducer/authReducer";
-import { getOrder } from "@/store/reducer/orderReducer";
 import { message } from "antd";
-import queryString from "query-string";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useSearchParams } from "react-router-dom";
-
 const useDashboard = () => {
   const { profile } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   //// Profile
   const [provinces, setProvinces] = useState([]);
   const [provinceId, setProvinceId] = useState("");

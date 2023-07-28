@@ -3,7 +3,6 @@ import Loading from "./components/Loading";
 import { PATHS } from "./contants/paths";
 import PrivateRoute from "./components/PrivateRoute";
 import { Suspense, lazy } from "react";
-import Account from "./pages/Dashboard/Account";
 const MainLayout = lazy(() => import("./layout/MainLayout"));
 const Home = lazy(() => import("./pages/Home"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -25,9 +24,8 @@ const CheckoutDetail = lazy(() =>
 const FAQS = lazy(() => import("./pages/FAQs"));
 const Returns = lazy(() => import("./pages/Returns"));
 const Shipping = lazy(() => import("./pages/Shipping"));
-// const PrivateRoute = lazy(() => import("./components/PrivateRoute"));
-const Profile = lazy(() => import("./pages/Dashboard/Profile"));
 const Order = lazy(() => import("./pages/Dashboard/Order"));
+const Account = lazy(() => import("./pages/Dashboard/Account"));
 const Address = lazy(() => import("./pages/Dashboard/Address"));
 const WishList = lazy(() => import("./pages/Dashboard/WishList"));
 function App() {
@@ -38,7 +36,6 @@ function App() {
           <Route index element={<Home />} />
           <Route path={PATHS.PRODUCT.INDEX} element={<Product />} />
           <Route path={PATHS.PRODUCT.DETAIL} element={<ProductDetail />} />
-          {/* <Route path={PATHS.DASHBOARD} element={<Dashboard />} /> */}
           <Route path={PATHS.FAQ} element={<FAQS />} />
           <Route path={PATHS.RETURN} element={<Returns />} />
           <Route path={PATHS.SHIPPING} element={<Shipping />} />

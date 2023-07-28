@@ -7,6 +7,7 @@ import { ENV } from "@/contants/environment";
 import { authReducer } from "./reducer/authReducer";
 import { cartReducer } from "./reducer/cartReducer";
 import { orderReducer } from "./reducer/orderReducer";
+import { whiteListReducer } from "./reducer/whiteListReducer";
 // compbine Reducer
 // const rootRecucer = combineReducers({
 //   couter: couterReducer,
@@ -35,6 +36,7 @@ const store = configureStore({
     auth: authReducer,
     cart: cartReducer,
     order: orderReducer,
+    whitelist: whiteListReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(thunkMiddleware),

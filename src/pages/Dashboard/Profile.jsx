@@ -6,6 +6,7 @@ import useDashboard from "./useDashboard";
 import { Select } from "antd";
 import dayjs from "dayjs";
 import { removeAccents } from "@/utils/removeAccents";
+import { useDispatch, useSelector } from "react-redux";
 
 const Profile = ({
   profile,
@@ -20,6 +21,9 @@ const Profile = ({
   onChangeDistrict,
   onChangeWard,
 }) => {
+  const dispatch = useDispatch();
+  const { whiteListInfo } = useSelector((state) => state.whitelist);
+  console.log("profile", profile);
   const {
     register,
     handleSubmit,
@@ -46,7 +50,6 @@ const Profile = ({
         : "",
     },
   });
-
   // handle Update Profile
   const onSubmit = (data) => {
     if (data) {
@@ -64,18 +67,6 @@ const Profile = ({
       onUpdate(payload);
     }
   };
-
-  // useEffect(() => {
-  //   callAPICitys();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (profile) {
-  //     for (const field in profile) {
-  //       setValue(field, profile[field]);
-  //     }
-  //   }
-  // }, [profile]);
   useEffect(() => {
     reset({
       firstName: profile?.firstName,
@@ -86,6 +77,7 @@ const Profile = ({
       district: profile?.district,
       street: profile?.street,
       ward: profile?.ward,
+      whiteList: profile?.whiteList,
       birthday: profile?.birthday
         ? dayjs(profile?.birthday || `01-01-2000`)
             .format(`YYYY/MM/DD`)
@@ -260,7 +252,6 @@ const Profile = ({
             />
           </div>
         </div>
-
         <Input
           error={errors?.address?.message}
           type="text"
@@ -275,6 +266,12 @@ const Profile = ({
           label="Current password (leave blank to leave unchanged)"
           required
           {...register("currentPassword")}
+        />
+        <Input
+          type="password"
+          label="New password (leave blank to leave unchanged)"
+          required
+          {...register("newPassword")}
         />
         <Input
           type="password"

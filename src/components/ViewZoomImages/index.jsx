@@ -63,17 +63,13 @@ const ViewZoomImages = ({ images }) => {
           )}
         </figure>
         {!errorImage && (
-          <div
-            style={{ minHeight: 580 }}
-            id="product-zoom-gallery"
-            className="product-image-gallery"
-          >
+          <div id="product-zoom-gallery" className="product-image-gallery">
             {images?.length &&
               images?.map((image, index) => {
                 return (
                   <a
                     key={index}
-                    style={{ height: "100px" }}
+                    style={{ height: "110px" }}
                     className={`product-gallery-item ${
                       index === 0 && images?.length > 1 ? "active" : ""
                     }`}

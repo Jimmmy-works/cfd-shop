@@ -1,11 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import ButtonBackToTop from "../components/ButtonBackToTop";
-import MobileMenu from "../components/MobileMenu";
-import MobileOverplay from "../components/MobileOverplay";
 import DashBoardNav from "@/pages/Dashboard/DashBoardNav";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "@/store/reducer/authReducer";
+import { useEffect } from "react";
+import useForceRender from "@/hooks/useForceRender";
 
 const DashboardLayout = () => {
   return (

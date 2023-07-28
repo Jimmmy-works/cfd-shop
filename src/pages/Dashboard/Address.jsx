@@ -1,6 +1,11 @@
+import { PATHS } from "@/contants/paths";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Address = () => {
+  const { profile } = useSelector((state) => state.auth);
+  const { firstName, email, phone } = profile || {};
   return (
     <div
       className="tab-pane fade active show"
@@ -17,18 +22,21 @@ const Address = () => {
             <div className="card-body">
               <h3 className="card-title">Billing Address</h3>
               <p>
-                <strong>Fullname:</strong> Tran Nghia <br />
-                <strong>Email:</strong> trannghia@gmail.com <br />
-                <strong>Phone number:</strong> 098 9596 912 <br />
+                <strong style={{ marginRight: "5px" }}>Fullname:</strong>{" "}
+                {firstName} <br />
+                <strong style={{ marginRight: "5px" }}>Email:</strong> {email}{" "}
                 <br />
-                <a href="#">
+                <strong style={{ marginRight: "5px" }}>Phone number:</strong>
+                {phone} <br />
+                <br />
+                <Link to={PATHS.DASHBOARD.INDEX}>
                   Edit <i className="icon-edit" />
-                </a>
+                </Link>
               </p>
             </div>
           </div>
         </div>
-        <div className="col-lg-6">
+        {/* <div className="col-lg-6">
           <div className="card card-dashboard">
             <div className="card-body">
               <h3 className="card-title">Shipping Address</h3>
@@ -41,7 +49,7 @@ const Address = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

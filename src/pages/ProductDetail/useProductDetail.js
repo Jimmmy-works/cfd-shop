@@ -2,9 +2,11 @@ import { useMainContext } from "@/components/MainContext";
 import { THUNK_STATUS } from "@/contants/general";
 import { LOCAL_STORAGE } from "@/contants/localStorage";
 import useQuery from "@/hooks/useQuery";
+import orderService from "@/service/orderService";
 import productService from "@/service/productService";
 import { updateCart } from "@/store/reducer/cartReducer";
 import { message } from "antd";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -15,11 +17,10 @@ const useProductDetail = () => {
   const { cartInfo, updateStatus } = useSelector((state) => state.cart);
   const { handleOpenAuthenModalLayout } = useMainContext();
   const productDetailForm = useForm();
-  const {
-    data: dataProductDetail,
-    loading: loadingProductDetail,
-    error: errorProductDetail,
-  } = useQuery(() => productService.getProductBySlug(slug), [slug]);
+  const { data: dataProductDetail, loading: loadingProductDetail } = useQuery(
+    () => productService.getProductBySlug(slug),
+    [slug]
+  );
   const onAddToCart = async (quantityValue) => {
     const isLogin = localStorage.getItem(LOCAL_STORAGE.token);
     const id = dataProductDetail?.id;
@@ -80,8 +81,20 @@ const useProductDetail = () => {
       }
     }
   };
+  const { data: dataReview, refetch: refetchReview } = useQuery(
+    orderService.getReviewById
+  );
+
+  useEffect(() => {
+    if (dataProductDetail?.id) {
+      refetchReview(dataProductDetail?.id);
+    }
+  }, [dataProductDetail]);
+
   return {
+    dataReview,
     dataProductDetail,
+    loadingProductDetail,
     productDetailForm,
     onAddToCart,
   };

@@ -13,7 +13,6 @@ const useAuthenModal = () => {
   const {
     isAuthenModalLayout,
     handleCloseAuthenModalLayout,
-    handleOpenAuthenModalLayout,
     isRenderForm,
     setIsRenderForm,
   } = useMainContext();
