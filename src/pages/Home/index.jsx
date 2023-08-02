@@ -7,13 +7,14 @@ import FeatureSection from "./FeatureSection";
 import ServiceSection from "./ServiceSection";
 import GetDealSection from "./GetDealSection";
 import useHome from "./useHome";
+import SkeletonLoading from "@/components/SkeletonLoading";
 
 const Home = () => {
   const { hotProductProps, featuredProps, brands, dealProps } = useHome();
   return (
     <main className="main">
       <IntroSection />
-      <HotProductSection {...hotProductProps} />
+      {hotProductProps && <HotProductSection {...hotProductProps} />}
       <div className="mb-7 mb-lg-11" />
       <DealSection />
       <BrandSection brands={brands} />

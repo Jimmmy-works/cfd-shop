@@ -49,10 +49,8 @@ export const getProfile = createAsyncThunk(
   "auth/profile/get",
   async (token, thunkAPI) => {
     try {
-      const dataProfile = await authenService.getProfile(token);
-      if (token) {
-        thunkAPI.dispatch(setProfile(dataProfile?.data?.data));
-      }
+      const dataProfile = await authenService.getProfile();
+      thunkAPI.dispatch(setProfile(dataProfile?.data?.data));
       return dataProfile?.data?.data;
     } catch (error) {
       console.log("error", error);

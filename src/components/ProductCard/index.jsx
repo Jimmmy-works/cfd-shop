@@ -2,10 +2,9 @@ import { PATHS } from "@/contants/paths";
 import { fomatCurrency } from "@/utils/fomatCurrency";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Image, Skeleton, message } from "antd";
+import { Image, message } from "antd";
 import { styled } from "styled-components";
 import { motion } from "framer-motion";
-import { useMainContext } from "../MainContext";
 import { LOCAL_STORAGE } from "@/contants/localStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { THUNK_STATUS } from "@/contants/general";
@@ -15,14 +14,25 @@ import {
   whiteListActions,
 } from "@/store/reducer/whiteListReducer";
 import { getProfile } from "@/store/reducer/authReducer";
-import { useEffect } from "react";
 const ImageWrapper = styled.div`
+  .product-image {
+    display: flex;
+    object-fit: cover;
+  }
   .ant-image {
     display: block;
   }
+  .ant-image-img {
+    object-fit: cover;
+  }
+  .ant-image-error {
+    height: auto !important;
+  }
+  .ant-image {
+    object-fit: cover;
+  }
 `;
-const ProductCard = ({ product, isProductLoading }) => {
-  const [errorImage, setErrorImage] = useState(false);
+const ProductCard = ({ product }) => {
   const imageError =
     "https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280";
 
@@ -40,10 +50,7 @@ const ProductCard = ({ product, isProductLoading }) => {
     (state) => state.whitelist
   );
   const { slug, id, images, rating, name } = product || {};
-  // console.log("id", id);
-  // console.log("profile", profile);
   const dispatch = useDispatch();
-  console.log("whiteListInfo", whiteListInfo);
   const onAddToCart = async () => {
     const isLogin = localStorage.getItem(LOCAL_STORAGE.token);
     try {
@@ -115,7 +122,6 @@ const ProductCard = ({ product, isProductLoading }) => {
           const res = await dispatch(addWhiteList(newPayload));
           if (res?.payload?.data?.data?.id) {
             await dispatch(getProfile());
-            await dispatch(whiteListActions.setWhiteList(res?.payload));
             message.success(`Đã thêm sản phẩm ${name} vào whitelist`);
           } else {
             message.success(`Sản phẩm đã có trong whitelist`);
@@ -127,7 +133,6 @@ const ProductCard = ({ product, isProductLoading }) => {
       message.error(`Đã xảy ra lỗi xin vui lòng thử lại`);
     }
   };
-  useEffect(() => {}, []);
 
   return (
     <motion.div
@@ -143,40 +148,23 @@ const ProductCard = ({ product, isProductLoading }) => {
         >
           {images?.length ? (
             <img
-              src={!errorImage ? images[0] : imageError}
-              onError={() => setErrorImage(true)}
+              src={images ? images[0] : imageError}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = imageError;
+              }}
               alt="Product image"
               className="product-image"
-              style={{ display: " flex", objectFit: "cover" }}
+              // style={{ display: " flex", objectFit: "cover" }}
             />
           ) : (
             <Image
               className="ant-image"
               width={"100%"}
               height={"100%"}
-              fallback="https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280"
+              fallback={imageError}
             />
           )}
-
-          {/* {images?.length || !errorImage ? (
-            <img
-              src={images[0]}
-              alt="Product image"
-              className="product-image"
-              style={{ display: " flex", objectFit: "cover" }}
-            />
-        
-          ) : (
-            <Image
-              onError={() => setErrorImage(true)}
-              className="ant-image"
-              width={"100%"}
-              height={"100%"}
-              fallback="https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280"
-            />
-          )
-        
-          } */}
         </Link>
         <div className="product-action-vertical">
           <a

@@ -44,6 +44,7 @@ export default function SkeletonLoading({
   isSize,
   isClassName,
   itemStyles,
+  isImageStyle,
 }) {
   return (
     <>
@@ -53,8 +54,7 @@ export default function SkeletonLoading({
           style={{ margin: "20px auto", fontSize: 20 }}
         />
       )}
-      {/* /      <div className="products mb-3"> */}
-      {/* <div className="row justify-content-center"> */}
+
       {isLoading &&
         Array(isArray)
           .fill("")
@@ -62,7 +62,7 @@ export default function SkeletonLoading({
             return (
               <div style={itemStyles} className={isClassName} key={index}>
                 <SkeletonWrapper>
-                  <Skeleton.Image></Skeleton.Image>
+                  <Skeleton.Image style={isImageStyle} />
                   <Skeleton
                     isData={isData}
                     style={isStyled}
@@ -76,8 +76,6 @@ export default function SkeletonLoading({
               </div>
             );
           })}
-      {/* </div>
-      </div> */}
     </>
   );
 }

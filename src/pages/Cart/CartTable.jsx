@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Image, Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
+import Button from "@/components/Button";
 const ImageWrapper = styled.div`
   height: 60px;
   width: 60px;
@@ -44,74 +45,95 @@ const CartTable = ({
     });
   };
   return (
-    <table className="table table-cart table-mobile">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {product?.length > 0 &&
-          product?.map((productItem, index) => {
-            const { slug, name, price, total, images, quantity } =
-              productItem || [];
-            return (
-              <tr key={slug || index}>
-                <td className="product-col">
-                  <div className="product">
-                    <ImageWrapper className="product-media">
-                      <Link to={`${PATHS.PRODUCT.INDEX}/${slug}`}>
-                        {!images ? (
-                          <img src={images} alt="Product image" />
-                        ) : (
-                          <div>
-                            <Image
-                              className="ant-image"
-                              width={"100%"}
-                              height={"100%"}
-                              fallback="https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280"
-                            />
-                          </div>
-                        )}
-                      </Link>
-                    </ImageWrapper>
-                    <h3 className="product-title">
-                      <Link to={`${PATHS.PRODUCT.INDEX}/${slug}`}>
-                        {name || ""}
-                      </Link>
-                    </h3>
-                  </div>
-                </td>
-                <td className="price-col">${fomatCurrency(price)}</td>
-                <td className="quantity-col">
-                  <QuantityInput
-                    className="cart-product-quantity"
-                    value={quantity}
-                    onChange={(value) => {
-                      return onUpdateQuantity(value, index);
-                    }}
-                  />
-                </td>
-                <td className="total-col">
-                  ${Number(price || 0) * (quantity || 0)}
-                </td>
-                <td className="remove-col">
-                  <button
-                    onClick={() => onRemoveProuductCart(productItem)}
-                    className="btn-remove"
-                  >
-                    <i className="icon-close" />
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-      </tbody>
-    </table>
+    <>
+      {cartInfo?.id ? (
+        <table className="table table-cart table-mobile">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {product?.length > 0 &&
+              product?.map((productItem, index) => {
+                const { slug, name, price, total, images, quantity } =
+                  productItem || [];
+                return (
+                  <tr key={slug || index}>
+                    <td className="product-col">
+                      <div className="product">
+                        <ImageWrapper className="product-media">
+                          <Link to={`${PATHS.PRODUCT.INDEX}/${slug}`}>
+                            {!images ? (
+                              <img src={images} alt="Product image" />
+                            ) : (
+                              <div>
+                                <Image
+                                  className="ant-image"
+                                  width={"100%"}
+                                  height={"100%"}
+                                  fallback="https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280"
+                                />
+                              </div>
+                            )}
+                          </Link>
+                        </ImageWrapper>
+                        <h3 className="product-title">
+                          <Link to={`${PATHS.PRODUCT.INDEX}/${slug}`}>
+                            {name || ""}
+                          </Link>
+                        </h3>
+                      </div>
+                    </td>
+                    <td className="price-col">${fomatCurrency(price)}</td>
+                    <td className="quantity-col">
+                      <QuantityInput
+                        className="cart-product-quantity"
+                        value={quantity}
+                        onChange={(value) => {
+                          return onUpdateQuantity(value, index);
+                        }}
+                      />
+                    </td>
+                    <td className="total-col">
+                      ${Number(price || 0) * (quantity || 0)}
+                    </td>
+                    <td className="remove-col">
+                      <button
+                        onClick={() => onRemoveProuductCart(productItem)}
+                        className="btn-remove"
+                      >
+                        <i className="icon-close" />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      ) : (
+        <div
+          style={{
+            height: "300px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            style={{ height: "60px", width: "120px" }}
+            variant="outline"
+            link={PATHS.PRODUCT.INDEX}
+          >
+            Back To Shop
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 

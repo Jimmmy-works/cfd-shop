@@ -4,7 +4,6 @@ import useDebounce from "@/hooks/useDebounce";
 import useDebounceHook from "@/hooks/useDebounceHook";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useMemo } from "react";
 import SkeletonLoading from "@/components/SkeletonLoading";
 const ProductList = ({
   isProductLoading,
@@ -18,7 +17,7 @@ const ProductList = ({
     show: {
       opacity: 1,
       top: 0,
-      transition: { duration: 0.4 },
+      transition: { duration: 0.3 },
     },
   };
   if ((!isProductLoading && products?.length < 1) || isProductError) {
@@ -63,7 +62,7 @@ const ProductList = ({
           })
         ) : (
           <SkeletonLoading
-            isClassName='  "col-6 col-md-4 col-lg-4'
+            isClassName="col-6 col-md-4 col-lg-4"
             isData={products}
             isArray={9}
             isParagraph={2}

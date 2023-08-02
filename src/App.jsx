@@ -3,12 +3,15 @@ import Loading from "./components/Loading";
 import { PATHS } from "./contants/paths";
 import PrivateRoute from "./components/PrivateRoute";
 import { Suspense, lazy } from "react";
+import PaymentMethod from "./pages/PaymentMethod";
+// import BlogLayout from "./layout/BlogLayout";
 const MainLayout = lazy(() => import("./layout/MainLayout"));
 const Home = lazy(() => import("./pages/Home"));
 const Contact = lazy(() => import("./pages/Contact"));
 const About = lazy(() => import("./pages/About"));
-const BlogSingle = lazy(() => import("./pages/BlogSingle"));
 const Blog = lazy(() => import("./pages/Blog"));
+const BlogSingle = lazy(() => import("./pages/BlogSingle"));
+const BlogLayout = lazy(() => import("./layout/BlogLayout"));
 const Page404 = lazy(() => import("./pages/Page404"));
 const Product = lazy(() => import("./pages/Product"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
@@ -41,10 +44,12 @@ function App() {
           <Route path={PATHS.SHIPPING} element={<Shipping />} />
           <Route path={PATHS.ABOUT} element={<About />} />
           <Route path={PATHS.CONTACT} element={<Contact />} />
-          <Route path={PATHS.BLOG.INDEX} element={<Blog />} />
-          <Route path={PATHS.BLOG.DETAIL} element={<BlogSingle />} />
           <Route path={PATHS.PRIVACYPOLICY} element={<PrivacyPolicy />} />
-
+          <Route path={PATHS.PAYMENT_METHOD} element={<PaymentMethod />} />
+          <Route path={PATHS.BLOG.INDEX} element={<BlogLayout />}>
+            <Route index element={<Blog />} />
+            <Route path={PATHS.BLOG.DETAIL} element={<BlogSingle />} />
+          </Route>
           <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
             <Route path={PATHS.CART} element={<Cart />} />
             <Route path={PATHS.CHECKOUT.INDEX} element={<CheckoutSuccess />} />

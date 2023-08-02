@@ -7,7 +7,6 @@ const Tab = ({ children }) => {
   const onChangeActiveTab = (index) => {
     setActiveTab(index);
   };
-  console.log("activeTab", activeTab);
   return (
     <TabContext.Provider value={{ activeTab, onChangeActiveTab }}>
       <div className="product-details-tab">{children}</div>

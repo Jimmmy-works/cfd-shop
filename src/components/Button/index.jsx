@@ -8,6 +8,7 @@ const Button = ({
   children,
   disabled,
   type,
+  style,
   ...buttonProps
 }) => {
   const variantClassName = useMemo(() => {
@@ -25,6 +26,7 @@ const Button = ({
   if (!link) {
     return (
       <button
+        style={style}
         type={type}
         className={`${variantClassName} ${className ?? ""} `}
         {...buttonProps}
@@ -35,6 +37,7 @@ const Button = ({
   }
   return (
     <Link
+      style={style}
       type={type}
       to={link}
       className={`${variantClassName} ${className ?? ""}`}

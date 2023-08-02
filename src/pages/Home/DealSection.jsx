@@ -52,7 +52,7 @@ const DealSection = () => {
                       </span>
                       <a href="product-detail.html">
                         <img
-                          src="assets/images/demos/demo-3/products/product-5.jpg"
+                          src="src/assets/images/demos/demo-3/products/product-5.jpg"
                           alt="Product image"
                           className="product-image"
                         />
@@ -105,7 +105,7 @@ const DealSection = () => {
                       </span>
                       <a href="product-detail.html">
                         <img
-                          src="assets/images/demos/demo-3/products/product-6.jpg"
+                          src="src/assets/images/demos/demo-3/products/product-6.jpg"
                           alt="Product image"
                           className="product-image"
                         />

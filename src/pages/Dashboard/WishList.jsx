@@ -14,11 +14,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const WishList = () => {
   const dispatch = useDispatch();
-  const [renderProfile, setRenderProfile] = useState({});
   const { profile } = useSelector((state) => state.auth);
-  const { whiteListInfo } = useSelector((state) => state.whitelist);
-
-  const [errorImage, setErrorImage] = useState(false);
   const imageError =
     "https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280";
 
@@ -72,30 +68,6 @@ const WishList = () => {
       console.log("error", error);
     }
   };
-  // const onDeleteWhiteList = async (productItem) => {
-  //   const findIndexDelete = profile?.whiteList?.filter((whiteList, index) => {
-  //     console.log("whiteList", whiteList);
-  //     return whiteList?.id !== productItem?.id;
-  //   });
-  //   console.log("findIndexDelete", findIndexDelete);
-  //   try {
-  //     const payload = {
-  //       ...profile,
-  //       whiteList: findIndexDelete,
-  //     };
-  //     console.log("payload", payload);
-  //     const res = await authenService.uploadProfile(payload);
-  //     console.log("res", res);
-  //     if (res?.data) {
-  //       // dispatch(whiteListActions.setWhiteList(res));
-  //       dispatch(getProfile());
-  //       message.success(`Sản phẩm ${productItem?.name || ""} đã được xóa`);
-  //     }
-  //   } catch (error) {
-  //     console.log("error", error);
-  //     message.error(`Đã xảy ra lỗi xin vui lòng thử lại`);
-  //   }
-  // };
   const onDeleteWhiteList = async (productItem) => {
     const findIndexDelete = profile?.whiteList?.filter((whiteList, index) => {
       return whiteList?.id !== productItem?.id;
@@ -103,11 +75,7 @@ const WishList = () => {
     console.log("findIndexDelete", findIndexDelete);
     try {
       const res = await whiteListService.deleteWhiteList(productItem?.id);
-      console.log("res", res);
-      // if (res?.data?.statusCode === 200 || res?.data?.statusCode === 201) {
       if (res?.data) {
-        setRenderProfile(res?.data?.data?.whiteList || {});
-        dispatch(whiteListActions.setWhiteList(res));
         dispatch(getProfile());
         message.success(`Sản phẩm ${productItem?.name || ""} đã được xóa`);
       }
@@ -116,13 +84,7 @@ const WishList = () => {
       message.error(`Đã xảy ra lỗi xin vui lòng thử lại`);
     }
   };
-  console.log("renderProfile", renderProfile);
-  useEffect(() => {
-    dispatch(getProfile());
-  }, []);
 
-  console.log("whiteListInfo", whiteListInfo);
-  console.log("profile", profile);
   return (
     <div
       className="tab-pane fade active show"
@@ -151,8 +113,11 @@ const WishList = () => {
                       <figure className="product-media">
                         <Link to={`${PATHS.PRODUCT.INDEX}/${slug}`}>
                           <img
-                            onError={() => setErrorImage(true)}
-                            src={!errorImage ? images[0] : imageError}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = imageError;
+                            }}
+                            src={images[0]}
                             alt="Product image"
                           />
                         </Link>

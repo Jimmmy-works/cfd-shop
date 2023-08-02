@@ -40,19 +40,19 @@ const ViewZoomImages = ({ images }) => {
         >
           {!!images?.length ? (
             <img
-              onError={() => setErrorImage(true)}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = imageError;
+              }}
               id="product-zoom"
-              src={!errorImage ? images[0] : imageError}
-              data-zoom-image={!errorImage ? images[0] : imageError}
+              src={images[0]}
+              data-zoom-image={images[0]}
               alt="product image"
             />
           ) : (
             <ImageWrapper>
               <ImageWrapper>
-                <Image
-                  fallback="https://cdn.dribbble.com/userupload/2905354/file/original-92212c04a044acd88c69bedc56b3dda2.png?compress=1&resize=1280x1280"
-                  alt="product"
-                />
+                <Image fallback={imageError} alt="product" />
               </ImageWrapper>
             </ImageWrapper>
           )}

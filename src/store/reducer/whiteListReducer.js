@@ -18,7 +18,7 @@ export const { reducer: whiteListReducer, actions: whiteListActions } =
       },
     },
     extraReducers: (builder) => {
-      //add
+      //addWhiteList
       builder.addCase(addWhiteList.pending, (state) => {
         state.addStatus = THUNK_STATUS.pending;
       });
@@ -37,21 +37,7 @@ export const addWhiteList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const res = await whiteListService.addWhiteList(payload);
-      console.log("res", res);
-      thunkAPI.fulfillWithValue(res);
-      return res;
-    } catch (error) {
-      console.log("error", error);
-      throw error;
-    }
-  }
-);
-export const removeWhiteList = createAsyncThunk(
-  "whitelist/post",
-  async (payload, thunkAPI) => {
-    try {
-      const res = await whiteListService.removeWhiteList(payload);
-      console.log("res", res);
+      thunkAPI.fulfillWithValue(res?.data);
       return res;
     } catch (error) {
       console.log("error", error);

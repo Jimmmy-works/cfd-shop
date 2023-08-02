@@ -78,7 +78,6 @@ const OrderTable = ({
   isReview,
   getOrderMe,
 }) => {
-  const [errorImage, setErrorImage] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rate, setRate] = useState();
   const [title, setTitle] = useState();
@@ -113,7 +112,6 @@ const OrderTable = ({
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  console.log("isReview", isReview);
   return (
     <Table>
       <div className="mytable">
@@ -160,8 +158,11 @@ const OrderTable = ({
                       <figure className="product-media">
                         <Link to={PATHS.PRODUCT.INDEX}>
                           <img
-                            onError={() => setErrorImage(true)}
-                            src={!imageError ? images[0] : imageError}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = imageError;
+                            }}
+                            src={images[0]}
                             alt="Product image"
                           />
                         </Link>

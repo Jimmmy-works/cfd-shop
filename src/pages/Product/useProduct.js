@@ -12,7 +12,7 @@ const useProduct = () => {
   const queryObject = queryString.parse(search);
   // use search param
   const [searchParams, setSearchParams] = useSearchParams();
-
+  // Update Query String
   const updateQueryString = (queryObject) => {
     const newQuerryString = queryString.stringify({
       ...queryObject,
@@ -100,7 +100,7 @@ const useProduct = () => {
   };
   // useEffect
   useEffect(() => {
-    refetchProducrt?.(search);
+    if (search) refetchProducrt?.(search);
   }, [search]);
 
   return {

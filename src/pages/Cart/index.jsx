@@ -35,7 +35,7 @@ const Cart = () => {
             <div className="row">
               <div className="col-lg-9">
                 <CartTable {...cartTableProps} />
-                <CartCoupon />
+                {/* <CartCoupon /> */}
               </div>
               <CartSumary {...cartSumaryProps} />
             </div>

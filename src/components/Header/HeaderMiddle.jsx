@@ -59,7 +59,11 @@ const HeaderMiddle = ({
             <i className="icon-bars" />
           </button>
           <NavLink to={PATHS.HOME} className="logo">
-            <img src="assets/images/logo.svg" alt="Molla Logo" width={160} />
+            <img
+              src="/src/assets/images/logo.svg"
+              alt="Molla Logo"
+              width={160}
+            />
           </NavLink>
         </div>
         <nav className="main-nav">
@@ -82,7 +86,7 @@ const HeaderMiddle = ({
           </ul>
         </nav>
         <div className="header-right">
-          <div className="header-search">
+          {/* <div className="header-search">
             <a href="#" className="search-toggle" role="button" title="Search">
               <i className="icon-search" />
             </a>
@@ -101,7 +105,7 @@ const HeaderMiddle = ({
                 />
               </div>
             </form>
-          </div>
+          </div> */}
           <div className="dropdown cart-dropdown">
             <a
               href="#"

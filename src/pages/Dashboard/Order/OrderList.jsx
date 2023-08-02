@@ -5,7 +5,6 @@ import moment from "moment/moment";
 
 const OrderList = ({ listOrder, getOrderMe }) => {
   const getItems = listOrder?.map((order, index) => {
-    console.log("order", order);
     const { id, updatedAt } = order || {};
     return {
       key: index,

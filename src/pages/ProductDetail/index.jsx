@@ -9,6 +9,12 @@ import ShareLink from "@/components/ShareLink";
 import ViewZoomImages from "@/components/ViewZoomImages";
 import Tab from "@/components/Tab/Tab";
 import ProductDetailReview from "./ProductDetailReview";
+import { useDispatch, useSelector } from "react-redux";
+import { addWhiteList } from "@/store/reducer/whiteListReducer";
+import { LOCAL_STORAGE } from "@/contants/localStorage";
+import { getProfile } from "@/store/reducer/authReducer";
+import { message } from "antd";
+import { THUNK_STATUS } from "@/contants/general";
 const ProductDetail = ({}) => {
   const {
     dataReview,
@@ -31,9 +37,43 @@ const ProductDetail = ({}) => {
     color,
     category,
   } = dataProductDetail || {};
-  console.log("dataProductDetail", dataProductDetail);
   const shareURL = window.location.href;
+  const dispatch = useDispatch();
   const [quantityValue, setQuantityValue] = useState("1");
+  const { profile } = useSelector((state) => state.auth);
+  const { addStatus, whiteListInfo } = useSelector((state) => state.whitelist);
+  const onAddToWhiteList = async () => {
+    const isLogin = localStorage.getItem(LOCAL_STORAGE.token);
+    try {
+      if (isLogin) {
+        let newPayload = {};
+        const newProductPayload = profile?.whiteList?.map(
+          (product) => product?.id
+        );
+        if (id && addStatus !== THUNK_STATUS.pending) {
+          if (whiteListInfo?.id) {
+            newPayload = {
+              product: newProductPayload,
+            };
+          } else {
+            newPayload = {
+              product: id,
+            };
+          }
+          const res = await dispatch(addWhiteList(newPayload));
+          if (res?.payload?.data?.data?.id) {
+            await dispatch(getProfile());
+            message.success(`Đã thêm sản phẩm ${name} vào whitelist`);
+          } else {
+            message.success(`Sản phẩm đã có trong whitelist`);
+          }
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+      message.error(`Đã xảy ra lỗi xin vui lòng thử lại`);
+    }
+  };
   return (
     <main className="main">
       <BreadCrumb className={`mb-2`}>
@@ -113,7 +153,7 @@ const ProductDetail = ({}) => {
                     </a>
                     <div className="details-action-wrapper">
                       <a
-                        href="#"
+                        onClick={onAddToWhiteList}
                         className="btn-product btn-wishlist"
                         title="Wishlist"
                       >
@@ -138,8 +178,8 @@ const ProductDetail = ({}) => {
                         <i className="icon-twitter" />
                       </ShareLink>
                       <ShareLink
-                        path={shareURL}
-                        type="facebook"
+                        type="instagram"
+                        path="https://www.instagram.com"
                         title="Instagram"
                       >
                         <i className="icon-instagram" />

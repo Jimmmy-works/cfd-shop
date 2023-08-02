@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { Input } from "@/components/Input";
+import ShareLink from "@/components/ShareLink";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -8,9 +9,11 @@ const GetDealSection = ({ executeDeal, loadingDeal, errorDeal }) => {
     handleSubmit,
     register,
     getValues,
+    setValue,
     watch,
     formState: { errors },
   } = useForm();
+  const shareURL = window.location.href;
   const onSubmit = () => {
     if (getValues("email")) {
       executeDeal({ email: getValues("email") });
@@ -34,46 +37,46 @@ const GetDealSection = ({ executeDeal, loadingDeal, errorDeal }) => {
                   porttitor mauris sit amet orci.{" "}
                 </p>
                 <div className="social-icons social-icons-colored justify-content-center">
-                  <a
-                    href="https://www.facebook.com/profile.php?id=100084745624368"
-                    className="social-icon social-facebook"
+                  <ShareLink
+                    type="facebook"
+                    path={shareURL}
+                    className="social-facebook"
                     title="Facebook"
-                    target="_blank"
                   >
                     <i className="icon-facebook-f" />
-                  </a>
-                  <a
-                    href="https://twitter.com/i/flow/login?redirect_after_login=%2F"
-                    className="social-icon social-twitter"
+                  </ShareLink>
+                  <ShareLink
+                    type="twitter"
+                    path={shareURL}
                     title="Twitter"
-                    target="_blank"
+                    className="social-twitter"
                   >
                     <i className="icon-twitter" />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/"
-                    className="social-icon social-instagram"
+                  </ShareLink>
+                  <ShareLink
+                    path="https://www.instagram.com/"
+                    className="social-instagram"
                     title="Instagram"
-                    target="_blank"
+                    type="instagram"
                   >
                     <i className="icon-instagram" />
-                  </a>
-                  <a
-                    href="https://www.youtube.com/"
-                    className="social-icon social-youtube"
+                  </ShareLink>
+                  <ShareLink
+                    path="https://www.youtube.com/@CFDCircle"
+                    className="social-youtube"
                     title="Youtube"
-                    target="_blank"
+                    type="youtube"
                   >
                     <i className="icon-youtube" />
-                  </a>
-                  <a
-                    href="https://www.pinterest.com/"
-                    className="social-icon social-pinterest"
+                  </ShareLink>
+                  <ShareLink
+                    className="social-youtube"
                     title="Pinterest"
-                    target="_blank"
+                    type="pinterest"
+                    path={shareURL}
                   >
                     <i className="icon-pinterest" />
-                  </a>
+                  </ShareLink>
                 </div>
               </div>
             </div>

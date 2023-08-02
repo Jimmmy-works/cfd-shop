@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import ProductCard from "@/components/ProductCard";
 import SkeletonLoading from "@/components/SkeletonLoading";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@uidotdev/usehooks";
 const FeatureSection = ({
   categories,
   selectFeaturedSlug,
@@ -19,7 +19,6 @@ const FeatureSection = ({
 
     onSelectFeaturedSlug?.(slug);
   };
-  const allLoading = loadingProduct || loadingProductCategories;
 
   useEffect(() => {
     const isLoading = setTimeout(() => {
@@ -30,7 +29,8 @@ const FeatureSection = ({
       clearTimeout(isLoading);
     };
   }, [featureProduct, renderFeaturedProducts]);
-
+  const allLoading = loadingProduct || loadingProductCategories;
+  const myLoading = useDebounce(allLoading, 500);
   return (
     <div className="container top" style={{ minHeight: 488 }}>
       <div className="heading heading-flex mb-3">

@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="col-sm-6 col-lg-5">
               <div className="widget widget-about">
                 <img
-                  src="assets/images/logo.svg"
+                  src="/src/assets/images/logo.svg"
                   className="footer-logo"
                   alt="Footer Logo"
                   width={120}
@@ -50,16 +50,24 @@ const Footer = () => {
                 <h4 className="widget-title">Customer Service</h4>
                 <ul className="widget-list">
                   <li>
-                    <a href="payment-methods.html">Payment Methods</a>
+                    <Link to={PATHS.PAYMENT_METHOD} href="payment-methods.html">
+                      Payment Methods
+                    </Link>
                   </li>
                   <li>
-                    <a href="returns.html">Returns</a>
+                    <Link to={PATHS.RETURN} href="returns.html">
+                      Returns
+                    </Link>
                   </li>
                   <li>
-                    <a href="shipping.html">Shipping</a>
+                    <Link to={PATHS.SHIPPING} href="shipping.html">
+                      Shipping
+                    </Link>
                   </li>
                   <li>
-                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <Link to={PATHS.PRIVACYPOLICY} href="privacy-policy.html">
+                      Privacy Policy
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -69,16 +77,24 @@ const Footer = () => {
                 <h4 className="widget-title">My Account</h4>
                 <ul className="widget-list">
                   <li>
-                    <a href="dashboard.html">Account Details</a>
+                    <Link to={PATHS.DASHBOARD.INDEX} href="dashboard.html">
+                      Account Details
+                    </Link>
                   </li>
                   <li>
-                    <a href="cart.html">View Cart</a>
+                    <Link to={PATHS.CART} href="cart.html">
+                      View Cart
+                    </Link>
                   </li>
                   <li>
-                    <a href="dashboard.html">My Wishlist</a>
+                    <Link to={PATHS.DASHBOARD.WISHLIST} href="dashboard.html">
+                      My Wishlist
+                    </Link>
                   </li>
                   <li>
-                    <a href="dashboard.html">Track My Order</a>
+                    <Link to={PATHS.DASHBOARD.ORDER} href="dashboard.html">
+                      Track My Order
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -97,7 +113,7 @@ const Footer = () => {
           </p>
           <figure className="footer-payments">
             <img
-              src="assets/images/payments.png"
+              src="/src/assets/images/payments.png"
               alt="Payment methods"
               width={272}
               height={20}
