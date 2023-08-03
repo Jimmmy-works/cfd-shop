@@ -17,7 +17,7 @@ export const SORT_OPTION = {
   },
   pricehigh: {
     value: "pricehigh",
-    label: "Price Hight to Low",
+    label: "Price High to Low",
     queryObject: {
       orderBy: "price",
       order: -1,

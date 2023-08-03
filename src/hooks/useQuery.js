@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const useQuery = (promise, dependencies = []) => {
+const useQuery = (promise, dependencies = [], configs) => {
+  const { preventDefaultCall = false } = configs || {};
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
   useEffect(() => {
+    if (preventDefaultCall) return;
     fetchData();
   }, dependencies);
 
@@ -20,7 +22,6 @@ const useQuery = (promise, dependencies = []) => {
       setLoading(false);
     }
   };
-  ///////
   return { data, loading, error, refetch: fetchData };
 };
 

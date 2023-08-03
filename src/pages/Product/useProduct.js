@@ -41,16 +41,16 @@ const useProduct = () => {
   const categories = dataProductCategories?.products || [];
 
   // Product Toolbox
-  const activeSort = useMemo(() => {
-    return Object.keys(SORT_OPTION)?.find((options) => {
-      return (
-        (
-          options?.queryObject?.order === queryObject?.order &&
-          options?.queryObject?.orderBy === queryObject?.orderBy
-        )?.valueOf || SORT_OPTION?.popularity?.value
-      );
-    });
-  }, [queryObject]);
+  // const activeSort = useMemo(() => {
+  //   return Object.keys(SORT_OPTION)?.find((options) => {
+  //     return (
+  //       (
+  //         options?.queryObject?.order === queryObject?.order &&
+  //         options?.queryObject?.orderBy === queryObject?.orderBy
+  //       )?.valueOf || SORT_OPTION?.popularity?.value
+  //     );
+  //   });
+  // }, [queryObject]);
   const onChangeSort = (sortType) => {
     const sortQueryString = SORT_OPTION[sortType]?.queryObject;
     if (sortQueryString) {
@@ -62,7 +62,7 @@ const useProduct = () => {
     onChangeSort,
     totalNumb: productsPagination?.total || 0,
     productsPagination,
-    activeSort,
+    // activeSort,
   };
   // Product List props
   const productListProps = {

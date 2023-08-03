@@ -38,7 +38,7 @@ const useBlog = () => {
     error: errorBlog,
     refetch: refetchBLog,
   } = useQuery((query) =>
-    blogService.getBlog(query || `?limit=${BLOG_LIMITS}`)
+    blogService.getBlog(query || `?limit=${BLOG_LIMITS}`, [])
   );
   const blogs = dataBlog?.blogs || [];
   const blogPagination = dataBlog?.pagination || {};
@@ -138,6 +138,9 @@ const useBlog = () => {
     searchTerm,
     setSearchTerm,
   };
+  useEffect(() => {
+    if (search) refetchBLog?.(search);
+  }, [search]);
   return {
     blogListProps,
     blogPaginationProps,

@@ -3,7 +3,7 @@ import blogService from "@/service/blogService";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import useBlog from "../Blog/useBLog";
-
+const BLOG_LIMITS = 6;
 const useBlogDetail = () => {
   const { search } = useLocation();
   const { slug } = useParams();
@@ -11,12 +11,16 @@ const useBlogDetail = () => {
   //   () => blogService.getBlog
   // );
   // const blogs = dataBLogs?.blogs;
+  ///// call API
+
   const { blogListProps } = useBlog();
   const {
     data: dataBLogDetail,
     loading: loadingBlogDetail,
     refetch: refetchBlogDetail,
-  } = useQuery(() => blogService.getBlogBySlug(slug));
+  } = useQuery(() => blogService.getBlogBySlug(slug), [], {
+    preventDefaultCall: false,
+  });
   //Blog Content
   const blogSingleContentProps = {
     dataBLogDetail,
@@ -33,8 +37,12 @@ const useBlogDetail = () => {
     blogs: blogListProps?.blogs,
     refetchBlogDetail,
   };
+  useEffect(() => {
+    console.log("11111", 11111);
+    refetchBlogDetail?.(slug ?? "");
+  }, [slug]);
   // useEffect(() => {
-  //   refetchBlogDetail?.(blogSingleContentProps?.dataBLogDetail?.slug);
+  //   if (slug) refetchBlogDetail?.(blogSingleContentProps?.dataBLogDetail?.slug);
   // }, [slug]);
   return {
     blogSingleContentProps,
