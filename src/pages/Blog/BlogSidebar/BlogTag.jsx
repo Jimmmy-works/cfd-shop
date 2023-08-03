@@ -1,9 +1,14 @@
-import { BASE_URL } from "@/contants/environment";
-import useQuery from "@/hooks/useQuery";
-import blogService from "@/service/blogService";
 import React from "react";
-import { Link, useSearchParams } from "react-router-dom";
-
+import styled from "styled-components";
+const Tag = styled.div`
+  a {
+    transition: 0.3s ease !important;
+    &:hover {
+      background-color: #ffc107;
+      color: #fff !important;
+    }
+  }
+`;
 const BlogTag = ({ blogTags, onChangeTags }) => {
   const onClickTag = (tag) => {
     onChangeTags(tag?.slug);
@@ -12,7 +17,7 @@ const BlogTag = ({ blogTags, onChangeTags }) => {
     <div className="sidebar">
       <div className="widget">
         <h3 className="widget-title">Browse Tags</h3>
-        <div className="tagcloud">
+        <Tag className="tagcloud">
           {blogTags?.length &&
             blogTags?.map((tag, index) => {
               return (
@@ -25,7 +30,7 @@ const BlogTag = ({ blogTags, onChangeTags }) => {
                 </a>
               );
             })}
-        </div>
+        </Tag>
       </div>
     </div>
   );

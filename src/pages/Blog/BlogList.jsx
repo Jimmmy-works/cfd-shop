@@ -84,11 +84,7 @@ const BlogList = ({
         blogs?.map((blog) => {
           const { updatedAt, name, image, description, id, author, slug } =
             blog || {};
-          // const filterBLogTag = tags?.filter((tag, index) => {
-          //   console.log("tag", tag);
-          //   console.log("filterBLogTag", tag === blogTagInfo?.id);
-          //   return tag === blogTagInfo;
-          // });
+
           return (
             <MyWrapper key={id} className="entry-item col-sm-6">
               <motion.div
@@ -151,103 +147,6 @@ const BlogList = ({
       )}
     </div>
   );
-  // }
-  // if (isLoading) {
-  //   return (
-  //     <div className="entry-container max-col-2" data-layout="fitRows">
-  //       <SkeletonLoading
-  //         isClassName="entry-item col-sm-6"
-  //         isData={blogs}
-  //         isArray={6}
-  //         isParagraph={2}
-  //         isLoading={isLoading}
-  //       />
-  //       ;
-  //     </div>
-  //   );
-  // }
-  // if (!isLoading & (blogs?.length >= 1)) {
-  //   return (
-  //     <div className="entry-container max-col-2" data-layout="fitRows">
-  //       {blogs?.length &&
-  //         blogs?.map((blog) => {
-  //           const { updatedAt, name, image, description, id, author, slug } =
-  //             blog || {};
-  //           // const filterBLogTag = tags?.filter((tag, index) => {
-  //           //   console.log("tag", tag);
-  //           //   console.log("filterBLogTag", tag === blogTagInfo?.id);
-  //           //   return tag === blogTagInfo;
-  //           // });
-  //           return (
-  //             <MyWrapper key={id} className="entry-item col-sm-6">
-  //               <motion.div
-  //                 variants={container}
-  //                 animate={`show`}
-  //                 initial={`hidden`}
-  //               >
-  //                 <article className="entry entry-grid">
-  //                   <figure className="entry-media">
-  //                     <Link to={`${PATHS.BLOG.INDEX}/${slug}`}>
-  //                       <img
-  //                         className="entry-img"
-  //                         onError={(e) => {
-  //                           e.target.onerror = null;
-  //                           e.target.src = imageError;
-  //                         }}
-  //                         src={image}
-  //                         alt="image desc"
-  //                       />
-  //                     </Link>
-  //                   </figure>
-  //                   <div className="entry-body">
-  //                     <div className="entry-meta">
-  //                       <span>
-  //                         {moment(updatedAt).format("MMMM Do YYYY, h:mm:ss a")}
-  //                       </span>
-  //                       <span className="meta-separator">|</span>
-  //                       <span className="entry-author">
-  //                         by{" "}
-  //                         <Link to={`${PATHS.BLOG.INDEX}/${slug}`}>
-  //                           {author}
-  //                         </Link>
-  //                       </span>
-  //                     </div>
-  //                     <h2 className="entry-title">
-  //                       <Link to={`${PATHS.BLOG.INDEX}/${slug}`}>{name}</Link>
-  //                     </h2>
-  //                     <div
-  //                       className="entry-content"
-  //                       dangerouslySetInnerHTML={{ __html: description }}
-  //                     ></div>
-  //                     <Link
-  //                       to={`${PATHS.BLOG.INDEX}/${slug}`}
-  //                       className="read-more"
-  //                     >
-  //                       Read More
-  //                     </Link>
-  //                   </div>
-  //                 </article>
-  //               </motion.div>
-  //             </MyWrapper>
-  //           );
-  //         })}
-  //     </div>
-  //   );
-  // }
-  // if (isLoading) {
-  //   return (
-  //     <div className="entry-container max-col-2" data-layout="fitRows">
-  //       <SkeletonLoading
-  //         isClassName="entry-item col-sm-6"
-  //         isData={blogs}
-  //         isArray={6}
-  //         isParagraph={2}
-  //         isLoading={isLoading}
-  //       />
-  //       ;
-  //     </div>
-  //   );
-  // }
 };
 
 export default BlogList;

@@ -11,7 +11,6 @@ const PageLink = ({ slug, blogs, refetchBlogDetail }) => {
     return blog?.slug === slug;
   });
   if (findBlog === undefined || findBlog < 0) {
-    console.log("1111111111", 1111111111);
     return (findBlog = blogs?.findIndex((blog, index) => {
       return blogs?.[blogs?.length - 1]?.slug;
     }));
@@ -25,7 +24,7 @@ const PageLink = ({ slug, blogs, refetchBlogDetail }) => {
   //   if (findBlog >= 0) {
   //     return navigate(
   //       `${origin}${PATHS.BLOG.INDEX}/${blogs?.[findBlog - 1]?.slug}`
-  //     );
+  //     );`
   //   } else if (findBlog < 0) {
   //     return navigate(
   //       `${origin}${PATHS.BLOG.INDEX}/${blogs?.[blogs?.length - 1]?.slug}`
@@ -41,9 +40,6 @@ const PageLink = ({ slug, blogs, refetchBlogDetail }) => {
   //     return navigate(`${origin}${PATHS.BLOG.INDEX}/${blogs?.[0]?.slug}`);
   //   }
   // };
-
-  console.log("findBlog", findBlog);
-  console.log("blogs", blogs);
 
   return (
     <>

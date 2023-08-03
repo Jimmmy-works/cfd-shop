@@ -11,13 +11,14 @@ import {
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogTag } from "@/store/reducer/blogReducer";
+import moment from "moment";
 
 const BLOG_LIMITS = 6;
+const POST_LIMITS = 4;
 const useBlog = () => {
   const { slug } = useParams();
   const dispatch = useDispatch();
   const { blogTagInfo } = useSelector((state) => state.blog);
-
   //Query strng
   const { search } = useLocation();
   const queryObject = queryString.parse(search) || {};
@@ -32,13 +33,16 @@ const useBlog = () => {
     setSearchParams(new URLSearchParams(newQuerryString));
   };
   // Call API
+  const { data: dataPost, loading: loadingPost } = useQuery((query) =>
+    blogService.getBlogUpdatedAt(query || `&limit=${POST_LIMITS}`)
+  );
   const {
     data: dataBlog,
     loading: loadingBlog,
     error: errorBlog,
     refetch: refetchBLog,
   } = useQuery((query) =>
-    blogService.getBlog(query || `?limit=${BLOG_LIMITS}`, [])
+    blogService.getBlog(query || `?limit=${BLOG_LIMITS}`)
   );
   const blogs = dataBlog?.blogs || [];
   const blogPagination = dataBlog?.pagination || {};
@@ -49,7 +53,8 @@ const useBlog = () => {
   const blogCategories = dataBlogCategories?.blogs || [];
 
   const { data: dataBlogTags, loading: loadingBlogTags } = useQuery(
-    blogService.getBlogTags
+    blogService.getBlogTags,
+    []
   );
   const blogTags = dataBlogTags?.blogs;
 
@@ -93,7 +98,6 @@ const useBlog = () => {
       window.location.pathname = "/blog";
     }
   };
-
   const onClearCategories = () => {
     updateQueryString({
       ...queryObject,
@@ -126,6 +130,7 @@ const useBlog = () => {
   const blogTagProps = { blogTags, onChangeTags, blogs };
   const blogPostProps = {
     blogs,
+    dataPost,
   };
   const blogCategoriesProps = {
     blogCategories,

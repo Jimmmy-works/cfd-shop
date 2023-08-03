@@ -13,6 +13,14 @@ const Title = styled.div`
     }
   }
 `;
+const List = styled.ul`
+  .my-style {
+    transition: color 0.3s ease !important;
+    &:hover {
+      color: #fcb941 !important;
+    }
+  }
+`;
 const BlogCategories = ({
   blogCategories,
   onChangeCategories,
@@ -34,14 +42,16 @@ const BlogCategories = ({
           Clear
         </a>
       </Title>
-      <ul>
+      <List>
         {blogCategories?.length &&
           blogCategories?.map((cate) => {
             return (
               <li onClick={() => onChangeFilter(cate?.id)} key={cate?.id}>
                 <a
                   onClick={onToggleCategories}
-                  className={`${cate?.id === activeCaterories ? "active" : ""}`}
+                  className={`${
+                    cate?.id === activeCaterories ? "active" : ""
+                  } my-style`}
                 >
                   {cate?.name || ""}
                   {/* <span>2</span> */}
@@ -49,7 +59,7 @@ const BlogCategories = ({
               </li>
             );
           })}
-      </ul>
+      </List>
     </div>
   );
 };

@@ -1,26 +1,23 @@
 import useQuery from "@/hooks/useQuery";
 import blogService from "@/service/blogService";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import useBlog from "../Blog/useBLog";
-const BLOG_LIMITS = 6;
+import queryString from "query-string";
+const POST_LIMITS = 4;
 const useBlogDetail = () => {
-  const { search } = useLocation();
   const { slug } = useParams();
-  // const { data: dataBLogs, loading: loadingBlogs } = useQuery(
-  //   () => blogService.getBlog
-  // );
-  // const blogs = dataBLogs?.blogs;
-  ///// call API
-
   const { blogListProps } = useBlog();
+  //// Call API
+
   const {
     data: dataBLogDetail,
     loading: loadingBlogDetail,
     refetch: refetchBlogDetail,
   } = useQuery(() => blogService.getBlogBySlug(slug), [], {
-    preventDefaultCall: false,
+    preventDefaultCall: true,
   });
+
   //Blog Content
   const blogSingleContentProps = {
     dataBLogDetail,
@@ -37,9 +34,9 @@ const useBlogDetail = () => {
     blogs: blogListProps?.blogs,
     refetchBlogDetail,
   };
+  const windowHref = window.location.href;
   useEffect(() => {
-    console.log("11111", 11111);
-    refetchBlogDetail?.(slug ?? "");
+    if (slug) refetchBlogDetail?.(slug ?? "");
   }, [slug]);
   // useEffect(() => {
   //   if (slug) refetchBlogDetail?.(blogSingleContentProps?.dataBLogDetail?.slug);

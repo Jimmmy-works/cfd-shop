@@ -40,6 +40,7 @@ export const SORT_OPTION = {
     },
   },
 };
+
 export const THUNK_STATUS = {
   pending: "pending",
   fulfilled: "fulfilled",

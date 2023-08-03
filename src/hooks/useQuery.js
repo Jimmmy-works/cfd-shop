@@ -5,7 +5,6 @@ const useQuery = (promise, dependencies = [], configs) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-
   useEffect(() => {
     if (preventDefaultCall) return;
     fetchData();
