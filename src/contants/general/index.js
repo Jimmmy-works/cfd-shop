@@ -64,3 +64,39 @@ export const PAYMENT_MENTHOD = {
 
   card: "card",
 };
+export const MOBILE_OPTION = {
+  menu: {
+    label: "MENU",
+    tab: "menu",
+  },
+  category: {
+    label: "CATEGORIES",
+    tab: "category",
+  },
+};
+export const FEATURED_SECTION = {
+  all: {
+    label: "All",
+    tab: "all",
+  },
+  tv: {
+    label: "TV",
+    tab: "TV",
+  },
+  computer: {
+    label: "Computers",
+    tab: "Computers",
+  },
+  tablet_phone: {
+    label: "Tablets & Phone",
+    tab: "Tablets & Cell Phones",
+  },
+  smart_watch: {
+    label: "Smart Watch",
+    tab: "Smartwatches",
+  },
+  accessory: {
+    label: "Accessories",
+    tab: "Accessories",
+  },
+};

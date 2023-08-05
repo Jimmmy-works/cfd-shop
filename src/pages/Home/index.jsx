@@ -12,7 +12,7 @@ import SkeletonLoading from "@/components/SkeletonLoading";
 const Home = () => {
   const { hotProductProps, featuredProps, brands, dealProps } = useHome();
   return (
-    <main className="main">
+    <main id="main-home" className="main">
       <IntroSection />
       {hotProductProps && <HotProductSection {...hotProductProps} />}
       <div className="mb-7 mb-lg-11" />

@@ -1,51 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import MobileSocial from "./MobileSocial";
+import MobileSearch from "./MobileSearch";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { PATHS } from "@/contants/paths";
+import { useMainContext } from "../MainContext";
+import useMobileMenu from "./useMobileMenu";
+import { FEATURED_SECTION, MOBILE_OPTION } from "@/contants/general";
+import useHome from "@/pages/Home/useHome";
 
 const MobileMenu = () => {
+  const { handleCloseMobileMenu, handleChangeTabCategories, categoriesMobile } =
+    useMainContext();
+  const { featuredProps } = useHome();
+  const { categories, selectFeaturedSlug, onSelectFeaturedSlug } =
+    featuredProps || {};
+  const { onChangeCategory, isCategories } = useMobileMenu();
+  const navigate = useNavigate();
+  const element = document.getElementById("feature_section");
+  const handleClickScroll = (slug) => {
+    if (selectFeaturedSlug === slug) return;
+    handleChangeTabCategories?.(slug);
+    onSelectFeaturedSlug?.(slug);
+    if (window.location.pathname === "/") {
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        handleCloseMobileMenu();
+      }
+    } else {
+      navigate("/");
+    }
+  };
+  useEffect(() => {
+    const featureSection = document.getElementById("feature_section");
+    const myTime = setTimeout(() => {
+      if (featureSection) {
+        featureSection.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }, 300);
+    return () => {
+      clearTimeout(myTime);
+    };
+  }, [window.location.pathname]);
+  useEffect(() => {
+    onSelectFeaturedSlug(categoriesMobile);
+    handleCloseMobileMenu();
+  }, [categoriesMobile]);
   return (
     <div className="mobile-menu-container">
       <div className="mobile-menu-wrapper">
-        <span className="mobile-menu-close">
+        <span onClick={handleCloseMobileMenu} className="mobile-menu-close">
           <i className="icon-close" />
         </span>
-        <form action="#" method="get" className="mobile-search">
-          <label htmlFor="mobile-search" className="sr-only">
-            Search
-          </label>
-          <input
-            type="search"
-            className="form-control"
-            name="mobile-search"
-            id="mobile-search"
-            placeholder="Search in..."
-            required=""
-          />
-          <button className="btn btn-primary" type="submit">
-            <i className="icon-search" />
-          </button>
-        </form>
+        <MobileSearch />
         <ul className="nav nav-pills-mobile nav-border-anim" role="tablist">
-          <li className="nav-item">
+          <li
+            onClick={() => onChangeCategory(MOBILE_OPTION.menu.tab)}
+            className="nav-item"
+          >
             <a
-              className="nav-link active"
-              id="mobile-menu-link"
-              data-toggle="tab"
-              href="#mobile-menu-tab"
-              role="tab"
-              aria-controls="mobile-menu-tab"
-              aria-selected="true"
+              className={`nav-link  ${
+                isCategories === MOBILE_OPTION.menu.tab ? "active" : ""
+              }`}
             >
               Menu
             </a>
           </li>
-          <li className="nav-item">
+          <li
+            className="nav-item"
+            onClick={() => onChangeCategory(MOBILE_OPTION.category.tab)}
+          >
             <a
-              className="nav-link"
-              id="mobile-cats-link"
-              data-toggle="tab"
-              href="#mobile-cats-tab"
-              role="tab"
-              aria-controls="mobile-cats-tab"
-              aria-selected="false"
+              className={`nav-link  ${
+                isCategories === MOBILE_OPTION.category.tab ? "active" : ""
+              }`}
             >
               Categories
             </a>
@@ -53,7 +86,9 @@ const MobileMenu = () => {
         </ul>
         <div className="tab-content">
           <div
-            className="tab-pane fade show active"
+            className={`tab-pane fade ${
+              isCategories === MOBILE_OPTION.menu.tab ? "show active" : ""
+            }`}
             id="mobile-menu-tab"
             role="tabpanel"
             aria-labelledby="mobile-menu-link"
@@ -61,19 +96,35 @@ const MobileMenu = () => {
             <nav className="mobile-nav">
               <ul className="mobile-menu">
                 <li>
-                  <a href="index.html">Home</a>
+                  <NavLink onClick={handleCloseMobileMenu} to={PATHS.HOME}>
+                    Home
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="about.html">About Us</a>
+                  <NavLink onClick={handleCloseMobileMenu} to={PATHS.ABOUT}>
+                    About Us
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="product.html">Product</a>
+                  <NavLink
+                    onClick={handleCloseMobileMenu}
+                    to={PATHS.PRODUCT.INDEX}
+                  >
+                    Product
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="blog.html">Blog</a>
+                  <NavLink
+                    onClick={handleCloseMobileMenu}
+                    to={PATHS.BLOG.INDEX}
+                  >
+                    Blog
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="contact.html">Contact Us</a>
+                  <NavLink onClick={handleCloseMobileMenu} to={PATHS.CONTACT}>
+                    Contact Us
+                  </NavLink>
                 </li>
               </ul>
             </nav>
@@ -81,30 +132,33 @@ const MobileMenu = () => {
           </div>
           {/* .End .tab-pane */}
           <div
-            className="tab-pane fade"
+            className={`tab-pane fade ${
+              isCategories === MOBILE_OPTION.category.tab ? "show active" : ""
+            }`}
             id="mobile-cats-tab"
             role="tabpanel"
             aria-labelledby="mobile-cats-link"
           >
             <nav className="mobile-cats-nav">
               <ul className="mobile-cats-menu">
-                <li>
-                  <a className="mobile-cats-lead" href="#">
-                    TV
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Computers</a>
-                </li>
-                <li>
-                  <a href="#">Tablets &amp; Cell Phones</a>
-                </li>
-                <li>
-                  <a href="#">Smartwatches</a>
-                </li>
-                <li>
-                  <a href="#">Accessories</a>
-                </li>
+                {categories?.length &&
+                  categories?.map((cate, index) => {
+                    const { name, slug } = cate || {};
+                    return (
+                      <li onClick={() => handleClickScroll(slug)}>
+                        <a
+                          className={`${
+                            selectFeaturedSlug === slug
+                              ? `mobile-cats-lead`
+                              : ""
+                          }`}
+                          onClick={handleClickScroll}
+                        >
+                          {name}
+                        </a>
+                      </li>
+                    );
+                  })}
               </ul>
               {/* End .mobile-cats-menu */}
             </nav>
@@ -113,20 +167,7 @@ const MobileMenu = () => {
           {/* .End .tab-pane */}
         </div>
         {/* End .tab-content */}
-        <div className="social-icons">
-          <a href="#" className="social-icon" target="_blank" title="Facebook">
-            <i className="icon-facebook-f" />
-          </a>
-          <a href="#" className="social-icon" target="_blank" title="Twitter">
-            <i className="icon-twitter" />
-          </a>
-          <a href="#" className="social-icon" target="_blank" title="Instagram">
-            <i className="icon-instagram" />
-          </a>
-          <a href="#" className="social-icon" target="_blank" title="Youtube">
-            <i className="icon-youtube" />
-          </a>
-        </div>
+        <MobileSocial />
         {/* End .social-icons */}
       </div>
       {/* End .mobile-menu-wrapper */}

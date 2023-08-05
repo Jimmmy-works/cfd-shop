@@ -14,6 +14,7 @@ import {
   whiteListActions,
 } from "@/store/reducer/whiteListReducer";
 import { getProfile } from "@/store/reducer/authReducer";
+import { useMainContext } from "../MainContext";
 const ImageWrapper = styled.div`
   .product-image {
     display: flex;
@@ -44,6 +45,7 @@ const ProductCard = ({ product }) => {
       transition: { duration: 0.4 },
     },
   };
+  const { handleOpenAuthenModalLayout } = useMainContext();
   const { profile } = useSelector((state) => state.auth);
   const { updateStatus, cartInfo } = useSelector((state) => state.cart);
   const { whiteListInfo, addStatus, updateListInfo } = useSelector(

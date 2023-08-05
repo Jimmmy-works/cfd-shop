@@ -3,23 +3,24 @@ import OwlCarousel from "react-owl-carousel";
 import ProductCard from "@/components/ProductCard";
 import SkeletonLoading from "@/components/SkeletonLoading";
 import { useDebounce } from "@uidotdev/usehooks";
+import { useMainContext } from "@/components/MainContext";
+import { FEATURED_SECTION } from "@/contants/general";
 const FeatureSection = ({
   categories,
   selectFeaturedSlug,
   featureProduct,
   onSelectFeaturedSlug,
-  loadingProduct,
-  loadingProductCategories,
 }) => {
   const [renderFeaturedProducts, setRenderFeaturedProducts] = useState([]);
-
+  const { categoriesMobile, handleChangeTabCategories } = useMainContext();
   const onChangeTab = (slug) => {
     if (selectFeaturedSlug === slug) return;
     setRenderFeaturedProducts([]);
-
     onSelectFeaturedSlug?.(slug);
+    handleChangeTabCategories?.(slug);
   };
-
+  if (categoriesMobile) {
+  }
   useEffect(() => {
     const isLoading = setTimeout(() => {
       setRenderFeaturedProducts(featureProduct);
@@ -29,10 +30,15 @@ const FeatureSection = ({
       clearTimeout(isLoading);
     };
   }, [featureProduct, renderFeaturedProducts]);
-  const allLoading = loadingProduct || loadingProductCategories;
-  const myLoading = useDebounce(allLoading, 500);
+  useEffect(() => {
+    onChangeTab(categoriesMobile);
+  }, [categoriesMobile, selectFeaturedSlug]);
   return (
-    <div className="container top" style={{ minHeight: 488 }}>
+    <div
+      id="feature_section"
+      className="container top"
+      style={{ minHeight: 488 }}
+    >
       <div className="heading heading-flex mb-3">
         <div className="heading-left">
           <h2 className="title">Featured Products</h2>

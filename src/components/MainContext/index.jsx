@@ -33,6 +33,20 @@ export const AuthenProvider = ({ children }) => {
   const onActiveErrorImage = (value) => {
     setErrorImage(value);
   };
+  //Control Open Mobile Menu
+  const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const [categoriesMobile, setCategoriesMobile] = useState("all");
+  const handleOpenMobileMenu = () => {
+    document.body.className = "mmenu-active";
+    setIsMobileMenu(true);
+  };
+  const handleCloseMobileMenu = () => {
+    document.body.className = "";
+    setIsMobileMenu(false);
+  };
+  const handleChangeTabCategories = (tab) => {
+    setCategoriesMobile(tab);
+  };
   return (
     <MainContext.Provider
       value={{
@@ -46,6 +60,12 @@ export const AuthenProvider = ({ children }) => {
         onActiveErrorImage,
         imageError,
         setErrorImage,
+        isMobileMenu,
+        setIsMobileMenu,
+        handleOpenMobileMenu,
+        handleCloseMobileMenu,
+        categoriesMobile,
+        handleChangeTabCategories,
       }}
     >
       {children}

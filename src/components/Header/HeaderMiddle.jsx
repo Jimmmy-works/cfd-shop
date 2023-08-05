@@ -11,6 +11,7 @@ import { Image, Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { styled } from "styled-components";
 import ProductCardDetail from "../ProductCardDetail";
+import { useMainContext } from "../MainContext";
 const ImageWrapper = styled.div`
   .ant-image {
     display: block;
@@ -22,6 +23,8 @@ const HeaderMiddle = ({
   totalProduct,
   handleRemoveProductCart,
 }) => {
+  const { isMobileMenu, handleOpenMobileMenu } = useMainContext();
+  /////
   const { confirm } = Modal;
   const dispatch = useDispatch();
   const isLogin = localStorage.getItem(LOCAL_STORAGE.token);
@@ -54,7 +57,10 @@ const HeaderMiddle = ({
     <div className="header-middle sticky-header">
       <div className="container">
         <div className="header-left">
-          <button className="mobile-menu-toggler">
+          <button
+            onClick={handleOpenMobileMenu}
+            className={`mobile-menu-toggler ${isMobileMenu ? "active" : ""}`}
+          >
             <span className="sr-only">Toggle mobile menu</span>
             <i className="icon-bars" />
           </button>

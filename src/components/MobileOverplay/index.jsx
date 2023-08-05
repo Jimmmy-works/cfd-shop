@@ -1,7 +1,11 @@
 import React from "react";
+import { useMainContext } from "../MainContext";
 
 const MobileOverplay = () => {
-  return <div className="mobile-menu-overlay" />;
+  const { handleCloseMobileMenu } = useMainContext();
+  return (
+    <div onClick={handleCloseMobileMenu} className={`mobile-menu-overlay `} />
+  );
 };
 
 export default MobileOverplay;

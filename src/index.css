@@ -17,3 +17,7 @@ a.active {
 .loading-skeleton {
     height: 100%;
 }
+
+.ant-message {
+    z-index: 2000;
+}
