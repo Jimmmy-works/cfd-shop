@@ -66,7 +66,7 @@ const HeaderMiddle = ({
           </button>
           <NavLink to={PATHS.HOME} className="logo">
             <img
-              src="/public/assets/images/logo.svg"
+              src="@/src/assets/images/logo.svg"
               alt="Molla Logo"
               width={160}
             />
