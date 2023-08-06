@@ -9,8 +9,13 @@ import { FEATURED_SECTION, MOBILE_OPTION } from "@/contants/general";
 import useHome from "@/pages/Home/useHome";
 
 const MobileMenu = () => {
-  const { handleCloseMobileMenu, handleChangeTabCategories, categoriesMobile } =
-    useMainContext();
+  const {
+    handleCloseMobileMenu,
+    handleChangeTabCategories,
+    categoriesMobile,
+    controlScroll,
+    setControlScroll,
+  } = useMainContext();
   const { featuredProps } = useHome();
   const { categories, selectFeaturedSlug, onSelectFeaturedSlug } =
     featuredProps || {};
@@ -19,6 +24,7 @@ const MobileMenu = () => {
   const element = document.getElementById("feature_section");
   const handleClickScroll = (slug) => {
     if (selectFeaturedSlug === slug) return;
+    setControlScroll(true);
     handleChangeTabCategories?.(slug);
     onSelectFeaturedSlug?.(slug);
     if (window.location.pathname === "/") {
@@ -30,13 +36,14 @@ const MobileMenu = () => {
         handleCloseMobileMenu();
       }
     } else {
+      setControlScroll(false);
       navigate("/");
     }
   };
   useEffect(() => {
     const featureSection = document.getElementById("feature_section");
     const myTime = setTimeout(() => {
-      if (featureSection) {
+      if (featureSection && controlScroll) {
         featureSection.scrollIntoView({
           behavior: "smooth",
           block: "center",
@@ -46,7 +53,7 @@ const MobileMenu = () => {
     return () => {
       clearTimeout(myTime);
     };
-  }, [window.location.pathname]);
+  }, [categoriesMobile]);
   useEffect(() => {
     onSelectFeaturedSlug(categoriesMobile);
     handleCloseMobileMenu();

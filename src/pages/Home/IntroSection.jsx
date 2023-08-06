@@ -1,6 +1,9 @@
+import { useMainContext } from "@/components/MainContext";
 import React from "react";
+import styled from "styled-components";
 
 const IntroSection = () => {
+  const { imageError } = useMainContext();
   return (
     <div className="intro-section pt-3 pb-3 mb-2">
       <div className="container">
@@ -23,6 +26,10 @@ const IntroSection = () => {
                 <div className="intro-slide">
                   <figure className="slide-image">
                     <img
+                      onError={(e) => {
+                        e.target.error = null;
+                        e.target.src = imageError;
+                      }}
                       src="/src/assets/images/demos/demo-3/slider/slide-1.jpg"
                       alt="Image Desc"
                     />
@@ -53,6 +60,10 @@ const IntroSection = () => {
                 <div className="intro-slide">
                   <figure className="slide-image">
                     <img
+                      onError={(e) => {
+                        e.target.error = null;
+                        e.target.src = imageError;
+                      }}
                       src="/src/assets/images/demos/demo-3/slider/slide-2.jpg"
                       alt="Image Desc"
                     />
@@ -91,6 +102,10 @@ const IntroSection = () => {
               <div className="banner mb-lg-1 mb-xl-2">
                 <a href="#">
                   <img
+                    onError={(e) => {
+                      e.target.error = null;
+                      e.target.src = imageError;
+                    }}
                     src="/src/assets/images/demos/demo-3/banners/banner-1.jpg"
                     alt="Banner"
                   />
@@ -110,6 +125,10 @@ const IntroSection = () => {
               <div className="banner mb-lg-1 mb-xl-2">
                 <a href="#">
                   <img
+                    onError={(e) => {
+                      e.target.error = null;
+                      e.target.src = imageError;
+                    }}
                     src="/src/assets/images/demos/demo-3/banners/banner-2.jpg"
                     alt="Banner"
                   />
@@ -128,6 +147,10 @@ const IntroSection = () => {
               <div className="banner mb-0">
                 <a href="#">
                   <img
+                    onError={(e) => {
+                      e.target.error = null;
+                      e.target.src = imageError;
+                    }}
                     src="/src/assets/images/demos/demo-3/banners/banner-3.jpg"
                     alt="Banner"
                   />

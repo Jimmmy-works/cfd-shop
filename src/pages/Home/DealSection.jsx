@@ -3,7 +3,6 @@ import React from "react";
 
 const DealSection = () => {
   const { imageError } = useMainContext();
-  console.log("imageError", imageError);
   return (
     <div className="bg-light deal-container pt-7 pb-7 mb-5">
       <div className="container">

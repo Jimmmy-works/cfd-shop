@@ -35,6 +35,7 @@ export const AuthenProvider = ({ children }) => {
   };
   //Control Open Mobile Menu
   const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const [controlScroll, setControlScroll] = useState(false);
   const [categoriesMobile, setCategoriesMobile] = useState("all");
   const handleOpenMobileMenu = () => {
     document.body.className = "mmenu-active";
@@ -66,6 +67,8 @@ export const AuthenProvider = ({ children }) => {
         handleCloseMobileMenu,
         categoriesMobile,
         handleChangeTabCategories,
+        controlScroll,
+        setControlScroll,
       }}
     >
       {children}
