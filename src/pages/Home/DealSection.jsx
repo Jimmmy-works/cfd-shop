@@ -50,13 +50,13 @@ const DealSection = () => {
                       <span className="product-label label-circle label-sale">
                         Sale
                       </span>
-                      <a href="product-detail.html">
+                      <a href="#">
                         <img
                           onError={(e) => {
                             e.target.error = null;
                             e.target.src = imageError;
                           }}
-                          src="src/assets/images/demos/demo-3/products/product-5.jpg"
+                          src="/assets/images/demos/demo-3/products/product-5.jpg"
                           alt="Product image"
                           className="product-image"
                         />
@@ -109,7 +109,7 @@ const DealSection = () => {
                       </span>
                       <a href="product-detail.html">
                         <img
-                          src="src/assets/images/demos/demo-3/products/product-6.jpg"
+                          src="/assets/images/demos/demo-3/products/product-6.jpg"
                           alt="Product image"
                           className="product-image"
                         />
