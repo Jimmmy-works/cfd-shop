@@ -141,8 +141,9 @@ const HeaderMiddle = ({
                             <Link
                               style={{
                                 display: "-webkit-box",
-                                webkitLineClamp: "2",
-                                webkitBoxOrient: "vertical",
+                                WebkitLineClamp: "2",
+                                WebkitBoxOrient: "vertical",
+
                                 overflow: "hidden",
                                 textOverflow: " ellipsis",
                               }}

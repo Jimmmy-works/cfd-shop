@@ -145,7 +145,7 @@ const MobileMenu = () => {
                   categories?.map((cate, index) => {
                     const { name, slug } = cate || {};
                     return (
-                      <li onClick={() => handleClickScroll(slug)}>
+                      <li key={slug} onClick={() => handleClickScroll(slug)}>
                         <a
                           className={`${
                             selectFeaturedSlug === slug

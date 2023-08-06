@@ -1,15 +1,18 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-const CheckBoxRemember = ({
-  type,
-  label,
-  required,
-  id,
-  className,
-  handleCheckbox,
-  isChecked,
-  ...rememberProps
-}) => {
+const CheckBoxRememberM = (
+  {
+    type,
+    label,
+    required,
+    id,
+    className,
+    handleCheckbox,
+    isChecked,
+    ...rememberProps
+  },
+  ref
+) => {
   return (
     <>
       <input type={type} className={className} id={id} {...rememberProps} />
@@ -24,5 +27,5 @@ const CheckBoxRemember = ({
     </>
   );
 };
-
+const CheckBoxRemember = forwardRef(CheckBoxRememberM);
 export default CheckBoxRemember;

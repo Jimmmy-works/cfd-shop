@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import useBlogDetail from "./useBlogDetail";
 import RelatedPost from "./RelatedPost";
 import PageLink from "./PageLink";
-import BlogSingleContent from "./BlogSIngleContent";
 import BlogSingleReply from "./BlogSingleReply";
 import BlogSingleComment from "./BlogSIngleComment";
+import BlogSingleContent from "./BlogSingleContent";
 
 const BlogSingle = () => {
   const { blogSingleContentProps, slug, relatedPostProps, controlPostProps } =
