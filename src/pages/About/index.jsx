@@ -86,7 +86,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/1.png"
+                        src="/src/assets/images/brands/1.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -94,7 +94,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/2.png"
+                        src="/src/assets/images/brands/2.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -102,7 +102,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/3.png"
+                        src="/src/assets/images/brands/3.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -110,7 +110,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/4.png"
+                        src="/src/assets/images/brands/4.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -118,7 +118,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/5.png"
+                        src="/src/assets/images/brands/5.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -126,7 +126,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/6.png"
+                        src="/src/assets/images/brands/6.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -134,7 +134,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/7.png"
+                        src="/src/assets/images/brands/7.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -142,7 +142,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/8.png"
+                        src="/src/assets/images/brands/8.png"
                         alt="Brand Name"
                       />
                     </a>
@@ -150,7 +150,7 @@ const About = () => {
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
                       <img
-                        src="src/assets/images/brands/9.png"
+                        src="/src/assets/images/brands/9.png"
                         alt="Brand Name"
                       />
                     </a>

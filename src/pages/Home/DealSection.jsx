@@ -1,6 +1,9 @@
+import { useMainContext } from "@/components/MainContext";
 import React from "react";
 
 const DealSection = () => {
+  const { imageError } = useMainContext();
+  console.log("imageError", imageError);
   return (
     <div className="bg-light deal-container pt-7 pb-7 mb-5">
       <div className="container">
@@ -52,7 +55,11 @@ const DealSection = () => {
                       </span>
                       <a href="product-detail.html">
                         <img
-                          src="src/assets/images/demos/demo-3/products/product-5.jpg"
+                          onError={(e) => {
+                            e.target.error = null;
+                            e.target.src = imageError;
+                          }}
+                          src="/src/assets/images/demos/demo-3/products/product-5.jpg"
                           alt="Product image"
                           className="product-image"
                         />
@@ -105,7 +112,7 @@ const DealSection = () => {
                       </span>
                       <a href="product-detail.html">
                         <img
-                          src="src/assets/images/demos/demo-3/products/product-6.jpg"
+                          src="/src/assets/images/demos/demo-3/products/product-6.jpg"
                           alt="Product image"
                           className="product-image"
                         />
