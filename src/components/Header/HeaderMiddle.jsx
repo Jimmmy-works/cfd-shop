@@ -10,7 +10,6 @@ import { cartActions } from "@/store/reducer/cartReducer";
 import { Image, Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { styled } from "styled-components";
-import ProductCardDetail from "../ProductCardDetail";
 import { useMainContext } from "../MainContext";
 const ImageWrapper = styled.div`
   .ant-image {
@@ -66,7 +65,7 @@ const HeaderMiddle = ({
           </button>
           <NavLink to={PATHS.HOME} className="logo">
             <img
-              src="@/src/assets/images/logo.svg"
+              src="src/assets/images/logo.svg"
               alt="Molla Logo"
               width={160}
             />
