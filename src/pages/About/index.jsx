@@ -85,74 +85,47 @@ const About = () => {
                 <div className="row justify-content-center">
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/1.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/1.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/2.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/2.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/3.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/3.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/4.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/4.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/5.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/5.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/6.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/6.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/7.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/7.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/8.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/8.png" alt="Brand Name" />
                     </a>
                   </div>
                   <div className="col-6 col-sm-4">
                     <a href="#" className="brand">
-                      <img
-                        src="/src/assets/images/brands/9.png"
-                        alt="Brand Name"
-                      />
+                      <img src="/assets/images/brands/9.png" alt="Brand Name" />
                     </a>
                   </div>
                 </div>

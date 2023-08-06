@@ -21,7 +21,7 @@ const Product = () => {
       <div
         className="page-header text-center"
         style={{
-          backgroundImage: 'url("/src/assets/images/page-header-bg.jpg")',
+          backgroundImage: 'url("/assets/images/page-header-bg.jpg")',
         }}
       >
         <div className="container">

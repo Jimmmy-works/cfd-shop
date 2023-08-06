@@ -9,10 +9,7 @@ const BlogSingleComment = () => {
           <div className="comment">
             <figure className="comment-media">
               <a href="#">
-                <img
-                  src="/src/assets/images/blog/comments/1.jpg"
-                  alt="User name"
-                />
+                <img src="/assets/images/blog/comments/1.jpg" alt="User name" />
               </a>
             </figure>
             <div className="comment-body">
@@ -42,7 +39,7 @@ const BlogSingleComment = () => {
                 <figure className="comment-media">
                   <a href="#">
                     <img
-                      src="/src/assets/images/blog/comments/2.jpg"
+                      src="/assets/images/blog/comments/2.jpg"
                       alt="User name"
                     />
                   </a>
@@ -71,10 +68,7 @@ const BlogSingleComment = () => {
           <div className="comment">
             <figure className="comment-media">
               <a href="#">
-                <img
-                  src="/src/assets/images/blog/comments/3.jpg"
-                  alt="User name"
-                />
+                <img src="/assets/images/blog/comments/3.jpg" alt="User name" />
               </a>
             </figure>
             <div className="comment-body">
