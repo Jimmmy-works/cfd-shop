@@ -3,8 +3,8 @@ import useBlogDetail from "./useBlogDetail";
 import RelatedPost from "./RelatedPost";
 import PageLink from "./PageLink";
 import BlogSingleReply from "./BlogSingleReply";
-import BlogSingleComment from "./BlogSIngleComment";
 import BlogSingleContent from "./BlogSingleContent";
+import BlogSingleComment from "./BlogSingleComment";
 
 const BlogSingle = () => {
   const { blogSingleContentProps, slug, relatedPostProps, controlPostProps } =
