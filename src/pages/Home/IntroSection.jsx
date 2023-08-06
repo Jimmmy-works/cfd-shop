@@ -47,10 +47,7 @@ const IntroSection = () => {
                         $247 <sup>.99</sup>
                       </span>
                     </div>
-                    <a
-                      href="product-detail.html"
-                      className="btn btn-primary btn-round"
-                    >
+                    <a href="#" className="btn btn-primary btn-round">
                       <span>Click Here</span>
                       <i className="icon-long-arrow-right" />
                     </a>
