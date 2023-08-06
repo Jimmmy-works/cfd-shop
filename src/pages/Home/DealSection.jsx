@@ -16,7 +16,7 @@ const DealSection = () => {
               className="deal"
               style={{
                 backgroundImage:
-                  'url("assets/images/demos/demo-3/deal/bg-1.jpg")',
+                  'url("/assets/images/demos/demo-3/deal/bg-1.jpg")',
               }}
             >
               <div className="deal-top">
@@ -25,15 +25,13 @@ const DealSection = () => {
               </div>
               <div className="deal-content">
                 <h3 className="product-title">
-                  <a href="product-detail.html">
-                    Home Smart Speaker with Google Assistant
-                  </a>
+                  <a>Home Smart Speaker with Google Assistant</a>
                 </h3>
                 <div className="product-price">
                   <span className="new-price">$129.00</span>
                   <span className="old-price">Was $150.99</span>
                 </div>
-                <a href="product-detail.html" className="btn btn-link">
+                <a className="btn btn-link">
                   <span>Shop Now</span>
                   <i className="icon-long-arrow-right" />
                 </a>
@@ -58,7 +56,7 @@ const DealSection = () => {
                             e.target.error = null;
                             e.target.src = imageError;
                           }}
-                          src="/src/assets/images/demos/demo-3/products/product-5.jpg"
+                          src="src/assets/images/demos/demo-3/products/product-5.jpg"
                           alt="Product image"
                           className="product-image"
                         />
@@ -111,7 +109,7 @@ const DealSection = () => {
                       </span>
                       <a href="product-detail.html">
                         <img
-                          src="/src/assets/images/demos/demo-3/products/product-6.jpg"
+                          src="src/assets/images/demos/demo-3/products/product-6.jpg"
                           alt="Product image"
                           className="product-image"
                         />

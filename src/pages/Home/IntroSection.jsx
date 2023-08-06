@@ -29,7 +29,7 @@ const IntroSection = () => {
                         e.target.error = null;
                         e.target.src = imageError;
                       }}
-                      src="src/assets/images/demos/demo-3/slider/slide-1.jpg"
+                      src="/assets/images/demos/demo-3/slider/slide-1.jpg"
                       alt="Image Desc"
                     />
                   </figure>
@@ -63,7 +63,7 @@ const IntroSection = () => {
                         e.target.error = null;
                         e.target.src = imageError;
                       }}
-                      src="src/assets/images/demos/demo-3/slider/slide-2.jpg"
+                      src="/assets/images/demos/demo-3/slider/slide-2.jpg"
                       alt="Image Desc"
                     />
                   </figure>
@@ -105,7 +105,7 @@ const IntroSection = () => {
                       e.target.error = null;
                       e.target.src = imageError;
                     }}
-                    src="src/assets/images/demos/demo-3/banners/banner-1.jpg"
+                    src="/assets/images/demos/demo-3/banners/banner-1.jpg"
                     alt="Banner"
                   />
                 </a>
@@ -128,7 +128,7 @@ const IntroSection = () => {
                       e.target.error = null;
                       e.target.src = imageError;
                     }}
-                    src="src/assets/images/demos/demo-3/banners/banner-2.jpg"
+                    src="/assets/images/demos/demo-3/banners/banner-2.jpg"
                     alt="Banner"
                   />
                 </a>
@@ -150,7 +150,7 @@ const IntroSection = () => {
                       e.target.error = null;
                       e.target.src = imageError;
                     }}
-                    src="src/assets/images/demos/demo-3/banners/banner-3.jpg"
+                    src="/assets/images/demos/demo-3/banners/banner-3.jpg"
                     alt="Banner"
                   />
                 </a>
