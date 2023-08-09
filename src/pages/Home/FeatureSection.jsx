@@ -13,6 +13,7 @@ const FeatureSection = ({
 }) => {
   const [renderFeaturedProducts, setRenderFeaturedProducts] = useState([]);
   const { categoriesMobile, handleChangeTabCategories } = useMainContext();
+  const [controlLoading, setControlLoading] = useState(true);
   const onChangeTab = (slug) => {
     if (selectFeaturedSlug === slug) return;
     setRenderFeaturedProducts([]);
@@ -22,12 +23,15 @@ const FeatureSection = ({
   if (categoriesMobile) {
   }
   useEffect(() => {
+    const isControl = setTimeout(() => {
+      setControlLoading(false);
+    }, 500);
     const isLoading = setTimeout(() => {
       setRenderFeaturedProducts(featureProduct);
     }, 300);
-
     return () => {
       clearTimeout(isLoading);
+      clearTimeout(isControl);
     };
   }, [featureProduct, renderFeaturedProducts]);
   useEffect(() => {
@@ -83,7 +87,7 @@ const FeatureSection = ({
           aria-labelledby="top-all-link"
           // style={{ minHeight: 520 }}
         >
-          {renderFeaturedProducts?.length > 0 ? (
+          {!controlLoading && renderFeaturedProducts?.length > 0 ? (
             <OwlCarousel
               nav={true}
               dots={false}
@@ -121,7 +125,14 @@ const FeatureSection = ({
                 })}
             </OwlCarousel>
           ) : (
-            <SkeletonLoading isParagraph={10} />
+            <SkeletonLoading
+              isClassName="product product-2"
+              isData={featureProduct}
+              isArray={1}
+              isParagraph={2}
+              isLoading={controlLoading}
+              itemStyles={{ width: "100%" }}
+            />
           )}
         </div>
       </div>

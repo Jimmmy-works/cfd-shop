@@ -9,41 +9,26 @@ const HotProductSection = ({
   onSelectHotProductTab,
   selectHotProductTab,
   hotProducts,
-  refetchProduct,
-  loadingProduct,
-  loadingProductCategories,
-  loadingHome,
 }) => {
   const [renderProducts, setRenderProducts] = useState([]);
-  const skeletonLoading = () => {
-    return (
-      <SkeletonLoading
-        // isClassName="product product-2"
-        isClassName="col-6 col-md-4 col-lg-4"
-        isData={renderProducts}
-        isArray={9}
-        isParagraph={2}
-        isLoading={myLoading}
-        itemStyles={{ width: "100%" }}
-      />
-    );
-  };
+  const [controlLoading, setControlLoading] = useState(true);
   const onChangeTab = (tabs) => {
     if (tabs === selectHotProductTab) return;
     setRenderProducts([]);
     onSelectHotProductTab?.(tabs);
   };
   useEffect(() => {
-    if (hotProducts?.length) return setRenderProducts(hotProducts);
+    const isControl = setTimeout(() => {
+      setControlLoading(false);
+    }, 500);
     const isLoading = setTimeout(() => {
       setRenderProducts(hotProducts);
     }, 300);
     return () => {
+      clearTimeout(isControl);
       clearTimeout(isLoading);
     };
   }, [renderProducts, hotProducts]);
-  const allLoading = loadingProduct || loadingProductCategories || loadingHome;
-  const myLoading = useDebounce(allLoading, 500);
   return (
     <div className="container featured" style={{ minHeight: 580 }}>
       <ul
@@ -89,7 +74,7 @@ const HotProductSection = ({
           role="tabpanel"
           aria-labelledby="products-featured-link"
         >
-          {!myLoading && renderProducts?.length ? (
+          {!controlLoading && renderProducts?.length ? (
             <OwlCarousel
               nav={true}
               dots={true}
@@ -124,16 +109,14 @@ const HotProductSection = ({
                 })}
             </OwlCarousel>
           ) : (
-            <div>
-              <SkeletonLoading
-                isClassName="product product-2"
-                isData={renderProducts}
-                isArray={1}
-                isParagraph={2}
-                isLoading={myLoading}
-                itemStyles={{ width: "100%" }}
-              />
-            </div>
+            <SkeletonLoading
+              isClassName="product product-2"
+              isData={renderProducts}
+              isArray={1}
+              isParagraph={2}
+              isLoading={controlLoading}
+              itemStyles={{ width: "100%" }}
+            />
           )}
         </div>
       </div>
