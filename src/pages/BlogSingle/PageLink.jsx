@@ -2,12 +2,11 @@ import { PATHS } from "@/contants/paths";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-const PageLink = ({ slug, blogs, relatedPostProps }) => {
+const PageLink = ({ slug, blogs }) => {
   const origin = window?.location?.origin;
   const PATH = `${origin}${PATHS.BLOG.INDEX}`;
   const checkLink = (_slug, type) => {
     const index = blogs.findIndex((it) => it.slug === _slug);
-    console.log("index", index);
     if (index === -1) {
       return;
     }
