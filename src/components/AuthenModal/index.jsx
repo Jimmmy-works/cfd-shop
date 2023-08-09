@@ -7,8 +7,10 @@ import { cn } from "@/utils/classnames";
 import useAuthenModal from "./useAuthenModal";
 
 const AuthenModalContainer = styled.div`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
-  padding-left: ${(props) => (props.isOpen ? "15px" : "0px")};
+  display: ${(props) =>
+    props?.isOpen ? "block !important" : "none !important"};
+  padding-left: ${(props) =>
+    props?.isOpen ? "15px !important" : "0px !important"};
 `;
 
 const AuthenModal = () => {
@@ -16,6 +18,7 @@ const AuthenModal = () => {
     useAuthenModal();
   // unmounted form
   // if (!isOpen) return <></>;
+  console.log("isOpen", isOpen);
   return (
     <AuthenModalContainer
       className={cn(`modal`, { "fade show": isOpen })}
