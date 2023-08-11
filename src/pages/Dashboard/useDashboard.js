@@ -1,14 +1,17 @@
+import { useMainContext } from "@/components/MainContext";
 import useMutation from "@/hooks/useMutation";
 import useQuery from "@/hooks/useQuery";
 import { authenService } from "@/service/authenService";
 import { countryService } from "@/service/countryService";
 import orderService from "@/service/orderService";
+import { authActions } from "@/store/reducer/authReducer";
 import { message } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const useDashboard = () => {
   const { profile } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const { userGoogle } = useMainContext();
   //// Profile
   const [provinces, setProvinces] = useState([]);
   const [provinceId, setProvinceId] = useState("");
@@ -81,7 +84,7 @@ const useDashboard = () => {
       return resUpdate?.data?.data;
     } catch (error) {
       console.log("error", error);
-      message.success(`Cập nhật thông tin thất bại !!`);
+      message.error(`Cập nhật thông tin thất bại !!`);
       throw error;
     }
   };
@@ -104,6 +107,8 @@ const useDashboard = () => {
     setProvinceId,
     setDistrictId,
     setWardId,
+    /// google
+    userGoogle,
   };
   //// Order
   const {

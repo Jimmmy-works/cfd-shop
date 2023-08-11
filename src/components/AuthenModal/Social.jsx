@@ -1,22 +1,16 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { useMainContext } from "../MainContext";
+import { message } from "antd";
+import jwtDecode from "jwt-decode";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import LoginGoogle from "../LoginGoogle/LoginGoogle";
 const Social = () => {
+  const { userGoogle } = useMainContext();
   return (
-    <div className="form-choice">
-      <p className="text-center">or sign in with</p>
-      <div className="row">
-        <div className="col-sm-6">
-          <a href="#" className="btn btn-login btn-g">
-            <i className="icon-google" /> Login With Google{" "}
-          </a>
-        </div>
-        <div className="col-sm-6">
-          <a href="#" className="btn btn-login btn-f">
-            <i className="icon-facebook-f" /> Login With Facebook{" "}
-          </a>
-        </div>
-      </div>
-    </div>
+    <>
+      {/* <div id="signinDiv"></div> */}
+      {Object.keys(userGoogle) != 0 ? "" : <LoginGoogle />}
+    </>
   );
 };
 

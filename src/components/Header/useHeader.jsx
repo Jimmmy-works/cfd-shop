@@ -2,18 +2,20 @@ import React from "react";
 import { useMainContext } from "../MainContext";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "@/store/reducer/authReducer";
-import { cartService } from "@/service/cartService";
 import { cartActions, updateCart } from "@/store/reducer/cartReducer";
 import { message } from "antd";
+import { useGoogleLogout } from "react-google-login";
 
 const useHeader = () => {
-  const { handleOpenAuthenModalLayout } = useMainContext();
+  const { handleOpenAuthenModalLayout, signOut, userGoogle } = useMainContext();
   const { cartInfo } = useSelector((state) => state.cart || {});
   const { profile } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
   const handleLogout = () => {
     dispatch(authActions?.logout());
     dispatch(cartActions?.clearCart());
+    signOut();
   };
   const handleRemoveProductCart = async (removeProductId) => {
     if (removeProductId) {
@@ -61,6 +63,7 @@ const useHeader = () => {
     profile,
     handleLogout,
     handleOpenAuthenModalLayout,
+    userGoogle,
   };
   return {
     headerTopProps,

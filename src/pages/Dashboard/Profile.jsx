@@ -7,6 +7,7 @@ import { Select } from "antd";
 import dayjs from "dayjs";
 import { removeAccents } from "@/utils/removeAccents";
 import { useDispatch, useSelector } from "react-redux";
+import { useMainContext } from "@/components/MainContext";
 
 const Profile = ({
   profile,
@@ -21,9 +22,6 @@ const Profile = ({
   onChangeDistrict,
   onChangeWard,
 }) => {
-  const dispatch = useDispatch();
-  const { whiteListInfo } = useSelector((state) => state.whitelist);
-  console.log("profile", profile);
   const {
     register,
     handleSubmit,
@@ -52,6 +50,7 @@ const Profile = ({
   });
   // handle Update Profile
   const onSubmit = (data) => {
+    console.log("data", data);
     if (data) {
       const payload = {
         firstName: data?.firstName || "",
@@ -67,6 +66,7 @@ const Profile = ({
       onUpdate(payload);
     }
   };
+  console.log("first", watch());
   useEffect(() => {
     reset({
       firstName: profile?.firstName,
@@ -108,7 +108,7 @@ const Profile = ({
           </div>
           <div className="col-sm-6">
             <Input
-              disabled
+              // disabled
               label="Email"
               {...register("email", {
                 required: `Please enter your email`,
@@ -166,6 +166,7 @@ const Profile = ({
                 { field } // :{ onChange, onBlur, value }
               ) => (
                 <Select
+                  status={errors?.province && "error"}
                   optionFilterProp="children"
                   filterOption={(input, option) =>
                     removeAccents(option?.label ?? "")
@@ -184,6 +185,15 @@ const Profile = ({
                 />
               )}
             />
+            <p
+              style={{
+                marginTop: "1.2rem",
+                opacity: errors?.province ? "1" : "0",
+              }}
+              class={`form-error`}
+            >
+              Please enter your city
+            </p>
           </div>
           <div className="col-sm-4">
             <label htmlFor="register-email">
@@ -199,6 +209,7 @@ const Profile = ({
                 { field } // :{ onChange, onBlur, value }
               ) => (
                 <Select
+                  status={errors?.district && "error"}
                   filterOption={(input, option) =>
                     removeAccents(option?.label ?? "")
                       .toLowerCase()
@@ -217,6 +228,15 @@ const Profile = ({
                 />
               )}
             />
+            <p
+              style={{
+                marginTop: "1.2rem",
+                opacity: errors?.district ? "1" : "0",
+              }}
+              class={`form-error`}
+            >
+              Please enter your district
+            </p>
           </div>
           <div className="col-sm-4">
             <label htmlFor="register-email">
@@ -231,25 +251,38 @@ const Profile = ({
               render={(
                 { field } // :{ onChange, onBlur, value }
               ) => (
-                <Select
-                  filterOption={(input, option) =>
-                    removeAccents(option?.label ?? "")
-                      .toLowerCase()
-                      .includes(removeAccents(input.toLowerCase()))
-                  }
-                  optionFilterProp="children"
-                  style={{ width: "100%" }}
-                  placeholder="Vui lòng chọn Quận/Huyện"
-                  options={wards}
-                  value={wardId || null}
-                  showSearch
-                  onChange={(value) => {
-                    field.onChange(value);
-                    onChangeWard(value);
-                  }}
-                />
+                <>
+                  <Select
+                    status={errors?.ward && "error"}
+                    filterOption={(input, option) =>
+                      removeAccents(option?.label ?? "")
+                        .toLowerCase()
+                        .includes(removeAccents(input.toLowerCase()))
+                    }
+                    optionFilterProp="children"
+                    style={{ width: "100%" }}
+                    placeholder="Vui lòng chọn Quận/Huyện"
+                    options={wards}
+                    value={wardId || null}
+                    showSearch
+                    onChange={(value) => {
+                      field.onChange(value);
+                      onChangeWard(value);
+                    }}
+                  />
+                </>
               )}
             />
+
+            <p
+              style={{
+                marginTop: "1.2rem",
+                opacity: errors?.ward ? "1" : "0",
+              }}
+              class={`form-error`}
+            >
+              Please enter your ward
+            </p>
           </div>
         </div>
         <Input

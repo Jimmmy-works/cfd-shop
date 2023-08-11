@@ -4,11 +4,11 @@ import { PATHS } from "@/contants/paths";
 import { Validate } from "@/utils/Validate";
 import useAuthenModal from "./useAuthenModal";
 import { cn } from "@/utils/classnames";
-import Social from "./Social";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
 import { Input } from "../Input";
 import { CheckboxAgreePrivacy } from "../CheckBoxCustom/CheckboxAgreePrivacy";
+import LoginGoogle from "../LoginGoogle/LoginGoogle";
 
 const Register = () => {
   const { activeTab, handleRegister, isOpen } = useAuthenModal();
@@ -107,7 +107,6 @@ const Register = () => {
           </div>
         </div>
       </form>
-      <Social />
     </div>
   );
 };

@@ -1,8 +1,15 @@
 import { PATHS } from "@/contants/paths";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useMainContext } from "../MainContext";
 
-const HeaderTop = ({ profile, handleLogout, handleOpenAuthenModalLayout }) => {
+const HeaderTop = ({
+  profile,
+  handleLogout,
+  handleOpenAuthenModalLayout,
+  userGoogle,
+}) => {
+  const { name, imageUrl } = userGoogle?.profileObj || {};
   return (
     <div className="header-top">
       <div className="container">
@@ -12,13 +19,32 @@ const HeaderTop = ({ profile, handleLogout, handleOpenAuthenModalLayout }) => {
           </a>
         </div>
         <div className="header-right">
-          {profile ? (
+          {Object.keys(userGoogle) != 0 || profile ? (
             // is Login
             <ul className="top-menu">
               <li>
-                <a className="top-link-menu">
-                  <i className="icon-user"></i>
-                  {profile?.firstName || "Guest"}
+                <a
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                  }}
+                  className="top-link-menu"
+                >
+                  {imageUrl ? (
+                    <img
+                      style={{
+                        borderRadius: "50%",
+                        height: "40px",
+                        width: "40px",
+                      }}
+                      src={imageUrl}
+                      alt="picture"
+                    />
+                  ) : (
+                    <i className="icon-user"></i>
+                  )}
+                  {name || profile?.firstName || "Guest"}
                 </a>
                 <ul>
                   <li>
@@ -34,6 +60,7 @@ const HeaderTop = ({ profile, handleLogout, handleOpenAuthenModalLayout }) => {
                           Wishlist <span>(3)</span>
                         </Link>
                       </li>
+
                       <li>
                         <Link
                           style={{ cursor: "pointer" }}

@@ -1,9 +1,17 @@
 import { LOCAL_STORAGE } from "@/contants/localStorage";
+import { authActions } from "@/store/reducer/authReducer";
+import { gapi } from "gapi-script";
+import jwtDecode from "jwt-decode";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useGoogleLogout } from "react-google-login";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const MainContext = createContext({});
 export const AuthenProvider = ({ children }) => {
+  // dispatch
+  const dispatch = useDispatch();
+  const { setProfile } = useSelector((state) => state.auth);
   // Navigate
   const navigate = useNavigate();
   // Control open layout modal
@@ -48,6 +56,46 @@ export const AuthenProvider = ({ children }) => {
   const handleChangeTabCategories = (tab) => {
     setCategoriesMobile(tab);
   };
+  /// Google login
+  const client_id =
+    "362842596048-ke67fjm6lvp2smfn0jk0ri6vmog6vhp9.apps.googleusercontent.com";
+  /// Logout
+  const onLogoutSuccess = (res) => {
+    setUserGoogle({});
+  };
+  const onFailureLogout = (res) => {
+    console.log("onFailure", res);
+  };
+  const { signOut } = useGoogleLogout({
+    clientId: client_id,
+    onLogoutSuccess,
+    onFailure: onFailureLogout,
+  });
+  /// Login
+  const [userGoogle, setUserGoogle] = useState({});
+
+  const onSuccess = (res) => {
+    handleCloseAuthenModalLayout();
+    setUserGoogle(res);
+    dispatch(
+      authActions?.setProfile({
+        firstName: res?.profileObj?.name,
+        email: res?.profileObj?.email,
+      })
+    );
+  };
+  const onFailure = (res) => {
+    console.log("onFailure", res);
+  };
+  useEffect(() => {
+    function startLogin() {
+      gapi.client.init({
+        client_id: client_id,
+      });
+      gapi.load("client2:auth2", startLogin);
+    }
+  });
+
   return (
     <MainContext.Provider
       value={{
@@ -69,6 +117,12 @@ export const AuthenProvider = ({ children }) => {
         handleChangeTabCategories,
         controlScroll,
         setControlScroll,
+        userGoogle,
+        setUserGoogle,
+        onSuccess,
+        onFailure,
+        client_id,
+        signOut,
       }}
     >
       {children}

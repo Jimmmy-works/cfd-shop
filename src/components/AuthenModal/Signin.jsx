@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Validate } from "@/utils/Validate";
 import useAuthenModal from "./useAuthenModal";
 import { cn } from "@/utils/classnames";
 import CheckBoxRemember from "../CheckBoxCustom/CheckBoxRemember";
-import Social from "./Social";
 import { Link } from "react-router-dom";
 import { PATHS } from "@/contants/paths";
 import { Input } from "../Input";
 import { useForm, useFormState } from "react-hook-form";
 import Button from "../Button";
 import { signin } from "@/store/reducer/authReducer";
+import LoginGoogle from "../LoginGoogle/LoginGoogle";
+import Social from "./Social";
 
 const Signin = () => {
   // useAuthen
@@ -112,7 +112,8 @@ const Signin = () => {
           </Link>
         </div>
       </form>
-      <Social />
+      {/* <Social /> */}
+      {/* <LoginGoogle /> */}
     </div>
   );
 };

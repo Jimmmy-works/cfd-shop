@@ -18,7 +18,6 @@ const AuthenModal = () => {
     useAuthenModal();
   // unmounted form
   // if (!isOpen) return <></>;
-  console.log("isOpen", isOpen);
   return (
     <AuthenModalContainer
       className={cn(`modal`, { "fade show": isOpen })}

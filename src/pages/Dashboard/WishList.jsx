@@ -72,7 +72,6 @@ const WishList = () => {
     const findIndexDelete = profile?.whiteList?.filter((whiteList, index) => {
       return whiteList?.id !== productItem?.id;
     });
-    console.log("findIndexDelete", findIndexDelete);
     try {
       const res = await whiteListService.deleteWhiteList(productItem?.id);
       if (res?.data) {

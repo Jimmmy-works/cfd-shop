@@ -27,7 +27,6 @@ const PageLink = ({ slug, blogs }) => {
       };
     }
   };
-  console.log("blogs", blogs);
   const dataNext = useMemo(() => {
     return checkLink(slug, "next");
   }, [blogs, slug]);

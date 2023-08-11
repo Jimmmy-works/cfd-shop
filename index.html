@@ -9,6 +9,7 @@
     <meta name="description" content="ReactJs Master Courses by CFD Circle" />
     <meta name="author" content="CFD Circle" />
     <link rel="canonical" href="https://cfdcircle.vn" />
+
     <!-- Favicon -->
     <link rel="icon" href="/src/assets/images/icons/favicon.ico" />
     <!-- Meta Tag Facebook -->
@@ -31,14 +32,16 @@
     <link rel="stylesheet" href="/assets/css/libs.min.css" />
     <!-- Main CSS File -->
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <!--Start of Fchat.vn-->
-    <script
+    <!-- <script
       type="text/javascript"
       src="https://cdn.fchat.vn/assets/embed/webchat.js?id=64d34c89d00bbf60990584c6"
       async="async"
-    ></script>
+    ></script> -->
     <!--End of Fchat.vn-->
   </head>
+
   <body>
     <!-- Plugins JS File -->
     <script src="/assets/js/jquery.min.js"></script>
@@ -54,6 +57,37 @@
     <script src="/assets/js/jquery.countdown.min.js"></script>
     <!-- Main JS File -->
     <!-- <script src="/assets/js/main.js"></script> -->
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+    <script>
+      var chatbox = document.getElementById("fb-customer-chat");
+      chatbox.setAttribute("page_id", "104786412719133");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          xfbml: true,
+          version: "v17.0",
+        });
+      };
+
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

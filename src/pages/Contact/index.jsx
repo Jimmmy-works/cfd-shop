@@ -25,7 +25,6 @@ const Contact = () => {
     workingSunday,
     phone,
   } = dataContact?.data || {};
-  console.log("dataContact", dataContact);
   const onSubmit = () => {
     const payload = {
       name: getValues("name"),
@@ -34,7 +33,6 @@ const Contact = () => {
       description: getValues("description"),
       phone: getValues("phone"),
     };
-    console.log("payload", payload);
     executeContact(payload);
   };
   return (
